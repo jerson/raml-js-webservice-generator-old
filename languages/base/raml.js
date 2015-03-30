@@ -63,13 +63,19 @@ exports.resources = function (ast, resources) {
         value.parentRelativeUri = ast.parentRelativeUri ? ast.parentRelativeUri : '';
         value.parentRelativeUri += ast.relativeUri ? ast.relativeUri : '';
 
-        value.groupRelatativeUri = ast.groupRelatativeUri ? ast.groupRelatativeUri : '';
-        if (!value.groupRelatativeUri) {
-            value.groupRelatativeUri = ast.relativeUri ? ast.relativeUri : value.relativeUri;
-            value.groupRelatativeUri = S(value.groupRelatativeUri).replace(/\//g, ' ').dasherize().slugify().s;
+        value.groupRelativeUri = ast.groupRelativeUri ? ast.groupRelativeUri : '';
+        if (!value.groupRelativeUri) {
+            value.groupRelativeUri = ast.relativeUri ? ast.relativeUri : value.relativeUri;
+            value.groupRelativeUri = S(value.groupRelativeUri).replace(/\//g, ' ').dasherize().slugify().s;
         }
 
-        value.name = S(value.groupRelatativeUri).capitalize().camelize().s;
+        value.name = S(value.groupRelativeUri).capitalize().camelize().s;
+
+        //value.suffixRelativeUri = ast.suffixRelativeUri ? ast.suffixRelativeUri : '';
+        value.suffixRelativeUri = ast.relativeUri ? ast.relativeUri : '';
+        value.suffixRelativeUri = value.suffixRelativeUri.replace(value.groupRelativeUri,'');
+        value.suffixRelativeUri = S(value.suffixRelativeUri).replace(/\//g, ' ').dasherize().slugify().s;
+        value.suffix = S(value.suffixRelativeUri).capitalize().camelize().s;
 
 
         value.methods = exports.methods(value);
@@ -89,7 +95,7 @@ exports.resources = function (ast, resources) {
  * @param ast
  * @returns {{}}
  */
-exports.resourcesGroups = function (ast) {
+exports.resourceGroups = function (ast) {
 
     var resources = exports.resources(ast);
     var groups = {};

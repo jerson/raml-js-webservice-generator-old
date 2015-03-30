@@ -15,7 +15,7 @@
 {% spaceless %}
 
     {% for methodObject in resource.methods %}
-    Route::{{ methodObject.method }}('{{ resource.parentRelativeUri }}{{ resource.relativeUri }}', '{{ resource.name }}Controller@{{ methodObject.action }}');
+    Route::{{ methodObject.method }}('{{ resource.parentRelativeUri }}{{ resource.relativeUri }}', '{{ resource.name }}Controller@{{ methodObject.action }}{{ resource.suffix }}');
     {% endfor %}
 
 {% endspaceless %}
