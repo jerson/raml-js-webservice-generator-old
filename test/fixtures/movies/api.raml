@@ -1,0 +1,71 @@
+#%RAML 0.8
+ 
+title: World Music API
+baseUri: http://example.api.com/{version}
+version: v1
+traits:
+  - paged:
+      queryParameters:
+        pages:
+          description: The number of pages to return
+          type: number
+schemas:
+ - actor: !include ../../../test/fixtures/movies/actor.schema
+ - genre: !include ../../../test/fixtures/movies/genre.schema
+ - movie: !include ../../../test/fixtures/movies/movie.schema
+ - news: !include ../../../test/fixtures/movies/news.schema
+ - autor: !include ../../../test/fixtures/movies/autor.schema
+/movies-lap:
+  post:
+  /{movieId}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              schema: |
+                { "$schema": "http://json-schema.org/schema",
+                  "type": "object",
+                  "description": "A canonical song",
+                  "properties": {
+                    "title":  { "type": "string" },
+                    "body": { "type": "string" }
+                  },
+                  "required": [ "title", "body" ]
+                }
+    /top:
+            post:
+            /{year}:
+              get:
+                responses:
+                  200:
+                    body:
+                      application/json:
+                        schema: |
+                          { "$schema": "http://json-schema.org/schema",
+                            "type": "object",
+                            "description": "A canonical song",
+                            "properties": {
+                              "title":  { "type": "string" },
+                              "body": { "type": "string" }
+                            },
+                            "required": [ "title", "body" ]
+                          }
+/news-list:
+  post:
+  /{newsId}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              schema: |
+                { "$schema": "http://json-schema.org/schema",
+                  "type": "object",
+                  "description": "A canonical song",
+                  "properties": {
+                    "title":  { "type": "string" },
+                    "body": { "type": "string" }
+                  },
+                  "required": [ "title", "body" ]
+                }

@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "title": "Order",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "required": false,
+      "title": "id"
+    },
+    "petId": {
+      "type": "integer",
+      "required": false,
+      "title": "petId"
+    },
+    "status": {
+      "type": "string",
+      "required": false,
+      "title": "status"
+    },
+    "quantity": {
+      "type": "integer",
+      "required": false,
+      "title": "quantity"
+    },
+    "shipDate": {
+      "type": "string",
+      "required": false,
+      "title": "shipDate"
+    }
+  }
+}

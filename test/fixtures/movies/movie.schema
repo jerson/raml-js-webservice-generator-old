@@ -1,0 +1,505 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://jsonschema.net",
+  "type": "object",
+  "additionalProperties": true,
+  "title": "Root schema.",
+  "description": "An explanation about the puropose of this instance described by this schema.",
+  "name": "/",
+  "properties": {
+    "id": {
+      "id": "http://jsonschema.net/id",
+      "type": "integer",
+      "multipleOf": 1,
+      "maximum": 100,
+      "minimum": 1,
+      "exclusiveMaximum": false,
+      "exclusiveMinimum": false,
+      "title": "Id schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "id",
+      "autoIncrement": true,
+      "primary": true,
+      "default": 55
+    },
+    "name": {
+      "id": "http://jsonschema.net/name",
+      "type": "string",
+      "minLength": 1,
+      "title": "Name schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "name",
+      "default": "The Hunger Games: Mockingjay - Part 1"
+    },
+    "slug": {
+      "id": "http://jsonschema.net/slug",
+      "type": "string",
+      "minLength": 1,
+      "title": "Slug schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "slug",
+      "unique": true,
+      "default": "the-hunger-games-mockingjay-part-1"
+    },
+    "autor": {
+      "id": "http://jsonschema.net/autor",
+      "type": "object",
+      "ref": "autor",
+      "title": "Autor schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "autor",
+      "default": "autor example"
+    },
+    "date_released": {
+      "id": "http://jsonschema.net/date_released",
+      "type": "date",
+      "minLength": 1,
+      "title": "Date_released schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "date_released",
+      "default": "2014-11-21T00:00:00-0500"
+    },
+    "date_released_timestamp": {
+      "id": "http://jsonschema.net/date_released_timestamp",
+      "type": "timestamp",
+      "minLength": 1,
+      "title": "Date_released schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "date_released",
+      "default": "2014-11-21T00:00:00-0500"
+    },
+    "date_released_time": {
+      "id": "http://jsonschema.net/date_released_time",
+      "type": "time",
+      "minLength": 1,
+      "title": "Date_released schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "date_released",
+      "default": "2014-11-21T00:00:00-0500"
+    },
+    "year": {
+      "id": "http://jsonschema.net/year",
+      "type": "integer",
+      "minLength": 1,
+      "title": "Year schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "year",
+      "default": "2014"
+    },
+    "trailer": {
+      "id": "http://jsonschema.net/trailer",
+      "type": "string",
+      "minLength": 1,
+      "title": "Trailer schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "trailer",
+      "default": "http://www.youtube.com/embed/3PkkHsuMrho"
+    },
+    "sinopsis": {
+      "id": "http://jsonschema.net/sinopsis",
+      "type": "string",
+      "minLength": 1,
+      "title": "Sinopsis schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "sinopsis",
+      "default": "Katniss se refugia en el Distrito 13 y es utilizada por los rebeldes como una herramienta de propaganda para unir a los distritos en el levantamiento contra el Capitolio y contra el presidente Snow. Peeta y los otros que fueron capturados por el Capitolio son rescatados. Tras la liberación de Peeta, se forma un grupo liderado por Katniss que tiene como principal misión infiltrarse en el Capitolio y asesinar al Presidente Snow."
+    },
+    "musicians": {
+      "id": "http://jsonschema.net/musicians",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": false,
+      "additionalItems": true,
+      "title": "Musicians schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "musicians",
+      "items": {
+        "id": "http://jsonschema.net/musicians/0",
+        "type": "string",
+        "minLength": 1,
+        "title": "0 schema.",
+        "description": "An explanation about the puropose of this instance described by this schema.",
+        "name": "0",
+        "default": "James Newton Howard"
+      }
+    },
+    "screenwriters": {
+      "id": "http://jsonschema.net/screenwriters",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": false,
+      "additionalItems": true,
+      "title": "Screenwriters schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "screenwriters",
+      "items": {
+        "id": "http://jsonschema.net/screenwriters/0",
+        "type": "string",
+        "minLength": 1,
+        "title": "0 schema.",
+        "description": "An explanation about the puropose of this instance described by this schema.",
+        "name": "0",
+        "default": "Danny Strong"
+      }
+    },
+    "directors": {
+      "id": "http://jsonschema.net/directors",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": false,
+      "additionalItems": true,
+      "title": "Directors schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "directors",
+      "items": {
+        "id": "http://jsonschema.net/directors/0",
+        "type": "string",
+        "minLength": 1,
+        "title": "0 schema.",
+        "description": "An explanation about the puropose of this instance described by this schema.",
+        "name": "0",
+        "default": "Francis Lawrence"
+      }
+    },
+    "producers": {
+      "id": "http://jsonschema.net/producers",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": false,
+      "additionalItems": true,
+      "title": "Producers schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "producers",
+      "items": {
+        "id": "http://jsonschema.net/producers/0",
+        "type": "string",
+        "minLength": 1,
+        "title": "0 schema.",
+        "description": "An explanation about the puropose of this instance described by this schema.",
+        "name": "0",
+        "default": "Color Force / Lionsgate"
+      }
+    },
+    "actors": {
+      "id": "http://jsonschema.net/actors",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": false,
+      "additionalItems": true,
+      "title": "Actors schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "actors",
+      "items": {
+        "id": "http://jsonschema.net/actors/0",
+        "type": "object",
+        "title": "0 schema.",
+        "description": "An explanation about the puropose of this instance described by this schema.",
+        "name": "actor",
+        "ref": "actor"
+      }
+    },
+    "genres": {
+      "id": "http://jsonschema.net/genres",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": false,
+      "additionalItems": true,
+      "title": "Genres schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "genres",
+      "items": [
+        {
+          "id": "http://jsonschema.net/genres/0",
+          "type": "object",
+          "additionalProperties": true,
+          "title": "0 schema.",
+          "description": "An explanation about the puropose of this instance described by this schema.",
+          "name": "genre",
+          "ref": "genre",
+          "properties": {
+            "id": {
+              "id": "http://jsonschema.net/genres/0/id",
+              "type": "integer",
+              "multipleOf": 1,
+              "maximum": 100,
+              "minimum": 1,
+              "exclusiveMaximum": false,
+              "exclusiveMinimum": false,
+              "title": "Id schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "id",
+              "default": 10
+            },
+            "name": {
+              "id": "http://jsonschema.net/genres/0/name",
+              "type": "string",
+              "minLength": 1,
+              "title": "Name schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "name",
+              "default": "Ciencia Ficcion"
+            },
+            "slug": {
+              "id": "http://jsonschema.net/genres/0/slug",
+              "type": "string",
+              "minLength": 1,
+              "title": "Slug schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "slug",
+              "default": "ciencia-ficcion"
+            },
+            "total": {
+              "id": "http://jsonschema.net/genres/0/total",
+              "type": "integer",
+              "multipleOf": 1,
+              "maximum": 100,
+              "minimum": 1,
+              "exclusiveMaximum": false,
+              "exclusiveMinimum": false,
+              "title": "Total schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "total",
+              "default": 250
+            }
+          }
+        }
+      ]
+    },
+    "links_watch": {
+      "id": "http://jsonschema.net/links_watch",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": false,
+      "additionalItems": true,
+      "title": "Links_watch schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "links_watch",
+      "items": [
+        {
+          "id": "http://jsonschema.net/links_watch/0",
+          "type": "object",
+          "additionalProperties": true,
+          "title": "0 schema.",
+          "description": "An explanation about the puropose of this instance described by this schema.",
+          "name": "link_watch",
+          "properties": {
+            "id": {
+              "id": "http://jsonschema.net/links_watch/0/id",
+              "type": "integer",
+              "multipleOf": 1,
+              "maximum": 100,
+              "minimum": 1,
+              "exclusiveMaximum": false,
+              "exclusiveMinimum": false,
+              "title": "Id schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "id",
+              "primary": true,
+              "autoIncrement": true,
+              "default": 360
+            },
+            "link": {
+              "id": "http://jsonschema.net/links_watch/0/link",
+              "type": "string",
+              "minLength": 1,
+              "title": "Link schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "link",
+              "unique": true,
+              "default": "http://vk.com/video_ext.php?oid=277127900&id=171042201&hash=db35a0fa8aa84b50&hd=1"
+            },
+            "provider": {
+              "id": "http://jsonschema.net/links_watch/0/provider",
+              "type": "string",
+              "minLength": 1,
+              "title": "Provider schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "provider",
+              "enum": [
+                "youtube",
+                "VK"
+              ],
+              "default": "VK"
+            },
+            "language": {
+              "id": "http://jsonschema.net/links_watch/0/language",
+              "type": "string",
+              "minLength": 1,
+              "title": "Language schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "language",
+              "enum": [
+                "Latino",
+                "Ingles"
+              ],
+              "default": "Latino"
+            },
+            "format": {
+              "id": "http://jsonschema.net/links_watch/0/format",
+              "type": "string",
+              "minLength": 1,
+              "title": "Format schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "format",
+              "enum": [
+                "CAM",
+                "HD"
+              ],
+              "default": "CAM"
+            }
+          }
+        }
+      ]
+    },
+    "links_download": {
+      "id": "http://jsonschema.net/links_download",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": false,
+      "additionalItems": true,
+      "title": "Links_download schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "links_download",
+      "items": [
+        {
+          "id": "http://jsonschema.net/links_download/0",
+          "type": "object",
+          "additionalProperties": true,
+          "title": "0 schema.",
+          "description": "An explanation about the puropose of this instance described by this schema.",
+          "name": "link_download",
+          "properties": {
+            "id": {
+              "id": "http://jsonschema.net/links_download/0/id",
+              "type": "integer",
+              "multipleOf": 1,
+              "maximum": 100,
+              "minimum": 1,
+              "exclusiveMaximum": false,
+              "exclusiveMinimum": false,
+              "title": "Id schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "id",
+              "primary": true,
+              "autoIncrement": true,
+              "default": 242
+            },
+            "link": {
+              "id": "http://jsonschema.net/links_download/0/link",
+              "type": "string",
+              "minLength": 1,
+              "title": "Link schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "link",
+              "unique": true,
+              "default": "http://streamcloud.eu/mxnulc7rp5cr/MockingjayP1.Cam.Latino.Gnula.avi.html"
+            },
+            "provider": {
+              "id": "http://jsonschema.net/links_download/0/provider",
+              "type": "string",
+              "minLength": 1,
+              "title": "Provider schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "provider",
+              "enum": [
+                "youtube",
+                "otro"
+              ],
+              "default": "youtube"
+            },
+            "language": {
+              "id": "http://jsonschema.net/links_download/0/language",
+              "type": "string",
+              "minLength": 1,
+              "title": "Language schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "language",
+              "enum": [
+                "Latino",
+                "Ingles"
+              ],
+              "default": "Latino"
+            },
+            "format": {
+              "id": "http://jsonschema.net/links_download/0/format",
+              "type": "string",
+              "minLength": 1,
+              "title": "Format schema.",
+              "description": "An explanation about the puropose of this instance described by this schema.",
+              "name": "format",
+              "enum": [
+                "CAM",
+                "HD"
+              ],
+              "default": "CAM"
+            }
+          }
+        }
+      ]
+    },
+    "views": {
+      "id": "http://jsonschema.net/views",
+      "type": "integer",
+      "multipleOf": 1,
+      "maximum": 100,
+      "minimum": 1,
+      "exclusiveMaximum": false,
+      "exclusiveMinimum": false,
+      "title": "Views schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "views",
+      "default": 0
+    },
+    "rating": {
+      "id": "http://jsonschema.net/rating",
+      "type": "integer",
+      "multipleOf": 1,
+      "maximum": 100,
+      "minimum": 1,
+      "exclusiveMaximum": false,
+      "exclusiveMinimum": false,
+      "title": "Rating schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "rating",
+      "default": 0
+    },
+    "next_release": {
+      "id": "http://jsonschema.net/next_release",
+      "type": "boolean",
+      "title": "Next_release schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "next_release",
+      "default": false
+    },
+    "image": {
+      "id": "http://jsonschema.net/image",
+      "type": "file",
+      "minLength": 1,
+      "title": "Image schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "image",
+      "default": "assets/images/b/2/7/f/2/b27f231bae5db6d2c3b03d5d3374384158ae20b1.jpg"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "slug",
+    "date_released",
+    "year",
+    "trailer",
+    "sinopsis",
+    "musicians",
+    "screenwriters",
+    "directors",
+    "producers",
+    "actors",
+    "genres",
+    "links_watch",
+    "links_download",
+    "views",
+    "rating",
+    "next_release",
+    "image"
+  ]
+}

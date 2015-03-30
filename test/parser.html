@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF8"/>
+    <title>RAML Parser Schema Generator</title>
+</head>
+<style>
+    * {
+        font-family: "Helvetic Neue", Helvetica, Arial;
+        font-size: 13px;
+        margin: 2px;
+    }
+
+    #output{
+        max-height: 400px;
+        overflow: auto;
+    }
+    body {
+        margin: 20px;
+    }
+
+    body > div {
+        width: 100%;
+        display: block;
+        vertical-align: top;
+    }
+
+    textarea {
+        width: 100%;
+        resize: vertical;
+    }
+
+    pre {
+        padding: 10px;
+        margin: 10px;
+        background: #f4f4f4;
+    }
+
+</style>
+<body>
+<div>
+    <pre id="output">Output</pre>
+</div>
+<div>
+    <div>
+        <label for="files">Example input files: </label><select id="files">
+        <option value='movies'>Movies</option>
+        <option value='pet-shop'>Pet Shop</option>
+    </select>
+    </div>
+    <div>
+        <label for="languages">Schema Languages: </label><select id="languages">
+        <option value='php'>PHP</option>
+    </select>
+    </div>
+    <div>
+        <label for="input">Input RAML: </label><textarea id="input" rows="20"></textarea>
+    </div>
+    <div>
+        <button type="button" id="clean">Clean</button>
+    </div>
+</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="../node_modules/raml-parser/dist/raml-parser.js"></script>
+<script type="text/javascript" src="../dist/raml-js-webservice-generator.1.0.0.min.js"></script>
+<script type="text/javascript">
+
+    var generators = RAML.Generator.WebService;
+    var $output = $('#output');
+    var $input = $('#input');
+    var $files = $('#files');
+    var $languages = $('#languages');
+    var $clean = $('#clean');
+    var $process = $('#process');
+
+    var generateSchema = function (ast) {
+
+        var selectedLanguage = $languages.find('option:selected').val();
+        return generators[selectedLanguage](ast, {});
+
+    };
+
+    $clean.on('click', function () {
+        $output.empty();
+        $input.val('');
+    });
+
+    $files.on('change', function () {
+        var filename = $('option:selected', this).val();
+        $input.load('../test/fixtures/' + filename + '/api.raml', function () {
+            $input.trigger('keypress');
+        });
+    });
+
+    $input.on('keypress keyup change', function () {
+
+        RAML.Parser.load($(this).val()).then(function (data) {
+            var generatedScript = generateSchema(data).files;
+            var outputFiles = [];
+
+            Object.keys(generatedScript).forEach(function (fileName) {
+                outputFiles.push('[' + fileName + ']\n' + generatedScript[fileName] + '\n');
+            });
+
+            $output.text(outputFiles.join('\n-------------------------------\n'));
+        }, function (error) {
+            $output.text(error);
+        });
+
+    });
+
+
+    $files.trigger('change');
+
+</script>
+</body>
+
+</html>

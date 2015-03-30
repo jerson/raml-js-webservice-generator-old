@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "title": "Tag",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "required": false,
+      "title": "id"
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "title": "name"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "title": "Pet",
+  "properties": {
+    "tags": {
+      "type": "array",
+      "required": false,
+      "title": "tags",
+      "items": {
+        "type": "object",
+        "$ref": "#/schemas/Tag"
+      },
+      "uniqueItems": false
+    },
+    "id": {
+      "type": "integer",
+      "required": true,
+      "title": "id",
+      "maximum": 100.0,
+      "minimum": 0.0
+    },
+    "category": {
+      "type": "object",
+      "$ref": "#/schemas/Category",
+      "required": false,
+      "title": "category"
+    },
+    "status": {
+      "type": "string",
+      "required": false,
+      "title": "status"
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "title": "name"
+    },
+    "photoUrls": {
+      "type": "array",
+      "required": false,
+      "title": "photoUrls",
+      "items": {
+        "type": "string",
+        "title": "photoUrls"
+      },
+      "uniqueItems": false
+    }
+  }
+}

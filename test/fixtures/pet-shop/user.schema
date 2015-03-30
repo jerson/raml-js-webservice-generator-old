@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "title": "User",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "required": false,
+      "title": "id"
+    },
+    "lastName": {
+      "type": "string",
+      "required": false,
+      "title": "lastName"
+    },
+    "userlogin": {
+      "type": "string",
+      "required": false,
+      "title": "userlogin"
+    },
+    "phone": {
+      "type": "string",
+      "required": false,
+      "title": "phone"
+    },
+    "email": {
+      "type": "string",
+      "required": false,
+      "title": "email"
+    },
+    "userStatus": {
+      "type": "integer",
+      "required": false,
+      "title": "userStatus"
+    },
+    "firstName": {
+      "type": "string",
+      "required": false,
+      "title": "firstName"
+    },
+    "password": {
+      "type": "string",
+      "required": false,
+      "title": "password"
+    }
+  }
+}

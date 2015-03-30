@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://jsonschema.net",
+  "type": "object",
+  "additionalProperties": true,
+  "title": "Root schema.",
+  "description": "An explanation about the puropose of this instance described by this schema.",
+  "name": "/",
+  "properties": {
+    "id": {
+      "id": "http://jsonschema.net/id",
+      "type": "integer",
+      "multipleOf": 1,
+      "maximum": 100,
+      "minimum": 1,
+      "exclusiveMaximum": false,
+      "exclusiveMinimum": false,
+      "title": "Id schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "id",
+      "autoIncrement":true,
+      "primary":true,
+      "default": 3
+    },
+    "name": {
+      "id": "http://jsonschema.net/name",
+      "type": "string",
+      "minLength": 1,
+      "title": "Name schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "name",
+      "default": "Gerson Alexander Pardo Gamez"
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

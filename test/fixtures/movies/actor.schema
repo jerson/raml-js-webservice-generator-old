@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://jsonschema.net",
+  "type": "object",
+  "additionalProperties": true,
+  "title": "Root schema.",
+  "description": "An explanation about the puropose of this instance described by this schema.",
+  "name": "/",
+  "properties": {
+    "id": {
+      "id": "http://jsonschema.net/id",
+      "type": "integer",
+      "multipleOf": 1,
+      "maximum": 100,
+      "minimum": 1,
+      "exclusiveMaximum": false,
+      "exclusiveMinimum": false,
+      "title": "Id schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "id",
+      "autoIncrement": true,
+      "primary": true,
+      "default": 5
+    },
+    "name": {
+      "id": "http://jsonschema.net/name",
+      "type": "string",
+      "minLength": 1,
+      "title": "Name schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "name",
+      "default": "Tom H'ardy"
+    },
+    "slug": {
+      "id": "http://jsonschema.net/slug",
+      "type": "string",
+      "minLength": 1,
+      "title": "Slug schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "slug",
+      "unique": true,
+      "default": "tom-hardy"
+    },
+    "country": {
+      "id": "http://jsonschema.net/country",
+      "type": "string",
+      "minLength": 1,
+      "title": "Country schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "country",
+      "default": "Reino Unido"
+    },
+    "birthday": {
+      "id": "http://jsonschema.net/birthday",
+      "type": "date",
+      "minLength": 1,
+      "title": "Birthday schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "birthday",
+      "default": "1977-09-15T00:00:00-0500"
+    },
+    "biography": {
+      "id": "http://jsonschema.net/biography",
+      "type": "text",
+      "minLength": 1,
+      "title": "Biography schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "biography",
+      "default": "Edward Thomas Hardy, más conocido como Tom Hardy es un talentoso actor británico nacido el 15 de septiembre de 1977 en Hammersmith.\r\r\tUno de los grandes talentos de la industria, fue conocido a nivel mundial por la película Bronson estrenada en el año 2009 donde interpretaba al protagonista de la película que daba el nombre a la cinta.\r\r\tSus papeles secundarios más destacados fueron en las movies Star Trek X: némesis y la película Inception.\r\r\tDio el salto a la fama gracias a su participación en la película Warrior donde interpretaba el papel de Tommy Riordan. Pero sin duda alguna su mayor actuación fue en la película The Dark Knight Rises de la saga de Batman donde interpretaba el papel del villano Bane.\r\r\tBiografía\r\r\tEmma es hija de Jeff y Krista Stone ama de casa. También tiene un hermano menor, Spencer, quien juega futbol americano. Desde muy pequeña mostro su pasión por la actuación, de hecho fue miembro del Teatro de la Juventud del Valle; un teatro regional ubicado en Phoenix, Arizona.\r\r\tEn este teatro realizo su primera presentación a los once años de edad con la obra de teatro El viento en los sauces. Estudio en el Cocopah Middle School donde también tuvo apariciones en las obras teatrales entre las cuales se destacan Winnie the Pooh,Cenicienta, The Wiz, Titanic, y Las aventuras de Alicia en el país de las maravillas.\r\r\tA la edad de quince años se mudo con su madre a la ciudad de los Angeles con el objetivo de comenzar su carrera como actriz.\r\r\tPrimeros pasos\r\r\tCreció en el East Sheen de Londres. Su madre se llama Ann y era una artista y pintora. Su padre, Edward Chips Hardy, era escritor de comedias. Sus primeros pasos en la actuación se dieron luego de haberse graduado en el Drama Centre London.\r\r\tLos primeros papeles interpretados por el actor eran de dramas bélicos, siendo su primera aparición en la miniserie para televisión Band of Brothers, donde interpretaba el papel del soldado John A. Janovec.\r\r\tSu primera aparición en la pantalla grande se da en el año 2001 de la mano del director, Ridley Scott con la película Black Hawk Down. Luego en el 2006 aparece como actor secundario en las películas María Antonieta de Sophia Coppola y en el año 2008 aparece en RocknRolla de Guy Ritchie.\r\r\tTras el rol protagonista en Bronson, la fama para el actor llega con su participación en la película de fama mundial, Inception, la cual tiene como protagonista al actor Leonardo di Caprio."
+    },
+    "image": {
+      "id": "http://jsonschema.net/image",
+      "type": "file",
+      "minLength": 1,
+      "title": "Image schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "image",
+      "default": "assets/images/8/2/7/e/7/827e76081e9c7ecca4450fcb8276a1a5b5c25051.jpg"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "slug",
+    "country",
+    "birthday",
+    "biography",
+    "image"
+  ]
+}

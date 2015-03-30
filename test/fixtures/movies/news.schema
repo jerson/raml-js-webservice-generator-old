@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://jsonschema.net",
+  "type": "object",
+  "additionalProperties": true,
+  "title": "Root schema.",
+  "description": "An explanation about the puropose of this instance described by this schema.",
+  "name": "/",
+  "properties": {
+    "id": {
+      "id": "http://jsonschema.net/id",
+      "type": "integer",
+      "multipleOf": 1,
+      "maximum": 100,
+      "minimum": 1,
+      "exclusiveMaximum": false,
+      "exclusiveMinimum": false,
+      "title": "Id schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "id",
+      "autoIncrement":true,
+      "primary":true,
+      "default": 39
+    },
+    "autor": {
+      "id": "http://jsonschema.net/autor",
+      "type": "object",
+      "ref": "autor",
+      "title": "Autor schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "autor",
+      "default": "autor example"
+    },
+    "title": {
+      "id": "http://jsonschema.net/title",
+      "type": "string",
+      "minLength": 1,
+      "title": "Title schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "title",
+      "default": "Se confirma un remake estadounidense para la cinta japonesa Audition"
+    },
+    "content": {
+      "id": "http://jsonschema.net/content",
+      "type": "text",
+      "minLength": 1,
+      "title": "Content schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "content",
+      "default": "<br>\nLos a\"fi'asd 'cionados al cine de terror japonés conocerán la película <b>Audition</b> pues ha sido un auténtico referente en la historia del mismo. Corría el año 1999 cuando un descerebrado <b>Takashi Miike se abría paso hacia occidente</b> con la idea de dar a conocer sus películas a gran escala. La retorcida forma de contar las cosas de este director lo ha convertido en un hombre bastante célebre para el cine independiente de terror y con el tiempo, se ha hecho con amplio abanico de seguidores que esperan impacientes sus nuevos títulos.<br><br>\r\nSon muchos los remakes que hace Estados Unidos de películas japonesas y ahora, parece ser que le toca el turno a <b>Audition</b>. Mario Kassar, productor de cintas como <b>Terminator 2</b> o <b>Desafío Total</b> es quien está tras la producción de este proyecto.<br><b>Audition</b> cuenta la historia de un hombre que finge ser director de casting con la idea de entrevistar jóvenes para encontrar pareja. A ese casting llega una hermosa chica asiática que resulta ser tan sexy como sádica.<br><br>\r\nEl argumento está <b>basado en un libro Ryu Murakami</b> y esta novela es también la que servirá de base para escribir el guión del remake estadounidense que por lo que sabemos, correrá a cargo de Richard Gray que además, también la dirigirá.<br>\r\nPor el momento, no se conoce la fecha de rodaje ni tampoco el reparto que tendrá la película aunque ya se ha comentado acerca de la opción no acertada de hacer remake de películas japonesas y es que, viendo los resultados que ha tenido el remake de <b>Oldboy</b> del coreano <b>Park Chan-Wook</b>, es normal que haya personas que no se fíen demasiado de lo que puede salir de aquí.<br><br>\r\nEn cualquier caso, la producción ya está en marcha y por lo que sabemos, no hay intención de pararla así que, tendremos que ver qué es lo que se termina cociendo y si finalmente hacen un <b>buen trabajo con un clásico del cine de terror japonés</b> de la nueva era que marcó la diferencia para el mundo occidental."
+    },
+    "slug": {
+      "id": "http://jsonschema.net/slug",
+      "type": "string",
+      "minLength": 1,
+      "title": "Slug schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "slug",
+      "unique": true,
+      "default": "se-confirma-un-remake-estadounidense-para-la-cinta-japonesa-audition"
+    },
+    "views": {
+      "id": "http://jsonschema.net/views",
+      "type": "integer",
+      "multipleOf": 1,
+      "maximum": 100,
+      "minimum": 1,
+      "exclusiveMaximum": false,
+      "exclusiveMinimum": false,
+      "title": "Views schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "views",
+      "default": 1
+    },
+    "date": {
+      "id": "http://jsonschema.net/date",
+      "type": "datetime",
+      "minLength": 1,
+      "title": "Date schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "date",
+      "default": "2015-02-02T15:55:47-0500"
+    },
+    "image": {
+      "id": "http://jsonschema.net/image",
+      "type": "file",
+      "minLength": 1,
+      "title": "Image schema.",
+      "description": "An explanation about the puropose of this instance described by this schema.",
+      "name": "image",
+      "default": "assets/images/d/2/e/4/4/d2e444ba0a2eb479e251253e9f860d9eff18540f.jpg"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "content",
+    "slug",
+    "views",
+    "date",
+    "image"
+  ]
+}

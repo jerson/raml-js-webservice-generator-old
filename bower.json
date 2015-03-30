@@ -1,0 +1,5 @@
+{
+  "name": "raml-js-webservice-generator",
+  "version": "1.0.0",
+  "main": "dist/*"
+}

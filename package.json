@@ -1,0 +1,73 @@
+{
+  "name": "raml-js-webservice-generator",
+  "version": "1.0.0",
+  "description": "RAML WebService generator",
+  "main": "bin/raml-to-webservice.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jerson/raml-js-webservice-generator.git"
+  },
+  "keywords": [
+    "raml",
+    "webservice",
+    "generator",
+    "javascript"
+  ],
+  "author": "Gerson Alexander Pardo Gamez <jeral17@gmail.com>",
+  "contributors": [
+    {
+      "name": "Jairo Alejandro Honorio Diaz",
+      "email": "registrofx@gmail.com"
+    }
+  ],
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/jerson/raml-js-webservice-generator/issues"
+  },
+  "homepage": "https://github.com/jerson/raml-js-webservice-generator",
+  "files": [
+    "languages/",
+    "lib/",
+    "bin/",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "gulp test",
+    "build": "gulp build"
+  },
+  "pre-commit": [
+    "build"
+  ],
+  "bin": {
+    "raml-to-webservice": "bin/raml-to-webservice.js"
+  },
+  "devDependencies": {
+    "bluebird": "^2.9.13",
+    "browser-sync": "^2.2.1",
+    "browserify": "^8.0.2",
+    "gulp": "^3.8.8",
+    "gulp-browserify": "^0.5.1",
+    "gulp-connect": "^2.2.0",
+    "gulp-jshint": "^1.8.4",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-sourcemaps": "^1.5.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-watch": "^4.1.1",
+    "json-schema": "^0.2.2",
+    "mkdirp": "^0.5.0",
+    "pre-commit": "^1.0.4",
+    "require-dir": "^0.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0",
+    "yargs": "^3.0.4"
+  },
+  "dependencies": {
+    "folderify": "^0.6.0",
+    "include-folder": "^0.7.0",
+    "raml-parser": "git+https://github.com/jerson/raml-js-parser.git",
+    "string": "^3.0.0",
+    "sugar": "^1.4.1",
+    "swig": "^1.4.2"
+  }
+}
