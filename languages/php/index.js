@@ -17,8 +17,7 @@ module.exports = function (ast, options) {
     var RAMLObject = ast;
     var resources = raml.resources(RAMLObject);
 
-
-    files['app']['Http']['routes.php'] = template.render('app/Http/routes.php', {resources: resources});
+    files.app.Http['routes.php'] = template.render('app/Http/routes.php', {resources: resources});
 
     return {
         files: files

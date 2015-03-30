@@ -60,19 +60,19 @@ exports.resources = function (ast, resources) {
 
     ast.resources.forEach(function (value) {
 
-
         value.parentRelativeUri = ast.parentRelativeUri ? ast.parentRelativeUri : '';
         value.parentRelativeUri += ast.relativeUri ? ast.relativeUri : '';
 
         value.groupRelatativeUri = ast.groupRelatativeUri ? ast.groupRelatativeUri : '';
         if (!value.groupRelatativeUri) {
             value.groupRelatativeUri = ast.relativeUri ? ast.relativeUri : value.relativeUri;
+            value.groupRelatativeUri = S(value.groupRelatativeUri).replace(/\//g, ' ').dasherize().slugify().s;
         }
 
-        value.name = S(value.groupRelatativeUri).slugify().capitalize().camelize().s;
+        value.name = S(value.groupRelatativeUri).capitalize().camelize().s;
+
 
         value.methods = exports.methods(value);
-        console.log(value.methods);
 
         resources.push(value);
         if (value.resources) {
@@ -86,21 +86,45 @@ exports.resources = function (ast, resources) {
 
 /**
  *
+ * @param ast
+ * @returns {{}}
+ */
+exports.resourcesGroups = function (ast) {
+
+    var resources = exports.resources(ast);
+    var groups = {};
+
+    resources.forEach(function (resource) {
+
+        if (!groups[resource.name]) {
+            groups[resource.name] = [];
+        }
+
+        groups[resource.name].push(resource);
+
+    });
+
+    return groups;
+};
+
+/**
+ *
  * @param resource
+ * @returns {*}
  */
 exports.methods = function (resource) {
 
-    resource.methods.forEach(function(method,index){
+    resource.methods.forEach(function (method, index) {
 
 
-        switch(method.method){
+        switch (method.method) {
             case 'get':
                 method.action = 'show';
                 break;
             case 'post':
                 method.action = 'create';
                 break;
-            case 'update':
+            case 'put':
                 method.action = 'update';
                 break;
             case 'delete':

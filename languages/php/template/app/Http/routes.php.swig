@@ -12,11 +12,13 @@
 */
 
 {% for resource in resources %}
+{% spaceless %}
 
     {% for methodObject in resource.methods %}
     Route::{{ methodObject.method }}('{{ resource.parentRelativeUri }}{{ resource.relativeUri }}', '{{ resource.name }}Controller@{{ methodObject.action }}');
     {% endfor %}
 
+{% endspaceless %}
 {% endfor %}
 
 //Route::controllers([
