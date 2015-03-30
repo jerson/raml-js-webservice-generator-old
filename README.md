@@ -1,5 +1,5 @@
-# raml-js-schema-generator
-RAML schema generator
+# raml-js-webservice-generator
+RAML webservice generator
 
 [![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/jerson/)
 
@@ -21,6 +21,3 @@ schemas:
  - autor: !include autor.schema
 
 ```
-
-##Output Schema
-![consola](https://github.com/jerson/raml-js-schema-generator/raw/master/doc/images/schema.png "Schema Generado")
