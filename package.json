@@ -60,6 +60,7 @@
     "require-dir": "^0.1.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
+    "gulp-run": "^1.6.7",
     "yargs": "^3.0.4"
   },
   "dependencies": {

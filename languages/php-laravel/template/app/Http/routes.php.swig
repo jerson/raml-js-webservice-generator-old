@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/', 'WelcomeController@index');
+
 {% for resource in resources %}
 {% spaceless %}
 

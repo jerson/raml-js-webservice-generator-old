@@ -66,13 +66,19 @@ exports.resources = function (ast, resources) {
         value.groupRelativeUri = ast.groupRelativeUri ? ast.groupRelativeUri : '';
         if (!value.groupRelativeUri) {
             value.groupRelativeUri = ast.relativeUri ? ast.relativeUri : value.relativeUri;
+
+            var baseName = '';
+            baseName = value.groupRelativeUri.split('/');
+            value.groupRelativeUri = baseName[1] ? baseName[1] : baseName[0];
             value.groupRelativeUri = S(value.groupRelativeUri).replace(/\//g, ' ').dasherize().slugify().s;
+
+            value.suffixRelativeUri = baseName.length > 1 ? baseName.join('/') : '';
         }
 
         value.name = S(value.groupRelativeUri).capitalize().camelize().s;
 
         //value.suffixRelativeUri = ast.suffixRelativeUri ? ast.suffixRelativeUri : '';
-        value.suffixRelativeUri = ast.relativeUri ? ast.relativeUri : '';
+        value.suffixRelativeUri = ast.relativeUri ? ast.relativeUri : value.suffixRelativeUri;
         value.suffixRelativeUri = value.suffixRelativeUri.replace(value.groupRelativeUri,'');
         value.suffixRelativeUri = S(value.suffixRelativeUri).replace(/\//g, ' ').dasherize().slugify().s;
         value.suffix = S(value.suffixRelativeUri).capitalize().camelize().s;
@@ -86,28 +92,38 @@ exports.resources = function (ast, resources) {
         }
     });
 
-    //console.log(JSON.stringify(resources, null, 2));
     return resources;
 };
 
 /**
  *
  * @param ast
- * @returns {{}}
+ * @returns {Array}
  */
 exports.resourceGroups = function (ast) {
 
     var resources = exports.resources(ast);
-    var groups = {};
+    var groupsKeys = {};
+    var groups = [];
 
     resources.forEach(function (resource) {
 
-        if (!groups[resource.name]) {
-            groups[resource.name] = [];
+        if (!groupsKeys[resource.name]) {
+            groupsKeys[resource.name] = [];
         }
 
-        groups[resource.name].push(resource);
+        groupsKeys[resource.name].push(resource);
 
+    });
+
+    Object.keys(groupsKeys, function (groupName, groupResources) {
+
+        var group = {
+            resources: groupResources,
+            name: groupName
+        };
+
+        groups.push(group);
     });
 
     return groups;

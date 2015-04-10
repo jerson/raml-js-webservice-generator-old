@@ -9,8 +9,9 @@ module.exports = function (ast, options) {
 
     var files = {
         app: {
-            Http: {},
-            Controllers: {}
+            Http: {
+                Controllers: {}
+            }
         }
     };
 
@@ -28,7 +29,7 @@ module.exports = function (ast, options) {
             name: groupName
         };
 
-        files.app.Controllers[util.format('%sController.php', groupName)] = template.render('app/Controllers/controller.php', {
+        files.app.Http.Controllers[util.format('%sController.php', groupName)] = template.render('app/Controllers/controller.php', {
             group: group
         });
 

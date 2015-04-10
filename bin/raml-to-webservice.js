@@ -26,7 +26,7 @@ var base = function (path) {
 var argv = require('yargs')
     .usage([
       'Generate Schema in any language.',
-      '$0 api.raml --output script.sql --language php'
+      '$0 api.raml --output script.sql --language phpSilex'
     ].join('\n\n'))
     .version(pkg.version, 'version')
     .alias('e', 'entry')
@@ -47,7 +47,7 @@ var argv = require('yargs')
 var options = {
   entry:    base(argv.entry || argv._[0]),
   output:   base(argv.output),
-  language: argv.language.toLowerCase()
+  language: argv.language
 };
 
 /**

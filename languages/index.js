@@ -4,4 +4,5 @@ var swig = require('swig');
 require('sugar');
 require('./base/filter/base');
 
-exports.php = require('./php');
+exports.phpSilex = require('./php-silex');
+exports.phpLaravel = require('./php-laravel');

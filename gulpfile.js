@@ -1,10 +1,12 @@
 var browserify = require('browserify');
 var gulp = require('gulp');
+var util = require('util');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
 var watch = require('gulp-watch');
+var run = require('gulp-run');
 var notify = require("gulp-notify");
 var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync');
@@ -28,6 +30,18 @@ gulp.task('watch:dist', function () {
     watch(['./dist/*.js', './test/*.html', './test/**/*.{raml,schema}'], function () {
         notify({message: 'reloading'});
         browserSync.reload();
+    });
+});
+
+gulp.task('watch:build-fixtures', function () {
+    watch(['./{bin,languages}/*.js', './{languages,lib}/**/*.{js,swig}', './test/**/*.{raml,schema}'], function () {
+        notify({message: 'build with fixtures'});
+
+        var fixtureName = process.env.GENERATOR_FIXTURE || 'movies';
+        var outputDir = process.env.GENERATOR_OUTPUT || __dirname + '/test/output/'+fixtureName;
+        var command = util.format('node %s/bin/raml-to-webservice.js %s/test/fixtures/%s/api.raml -l phpSilex -o %s', __dirname, __dirname, fixtureName, outputDir);
+
+        run(command).exec();
     });
 });
 
@@ -77,5 +91,9 @@ gulp.task('serve', ['watch:dist'], function () {
 });
 
 gulp.task('default', ['build', 'watch', 'serve'], function () {
+
+});
+
+gulp.task('fixtures', ['lint', 'watch:build-fixtures'], function () {
 
 });
