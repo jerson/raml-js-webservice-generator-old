@@ -2,7 +2,6 @@ var util = require('util'),
     keysParser = require('../parser/type'),
     schemaParser = require('../../base/parser/schema');
 
-
 exports.foreignType = function (property, schemas) {
 
     var fallbackType = 'INT(11)';
@@ -107,7 +106,6 @@ exports.type = function (property, schemas) {
             type = 'VARCHAR(250)';
             break;
     }
-
 
     return type;
 };

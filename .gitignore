@@ -34,3 +34,5 @@ output
 test/output
 dist
 *.log
+
+test/output

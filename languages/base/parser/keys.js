@@ -23,7 +23,6 @@ exports.foreignKey = function (name, schema, schemas) {
     var property = schema.properties[name];
     if (property.type === 'object' && property.ref) {
 
-
         var propertyReferenced = property.ref;
         if (!schemas[propertyReferenced]) {
             console.error(util.format('[%s] schema no encontrado', propertyReferenced));
@@ -68,6 +67,11 @@ exports.uniqueKey = function (name, schema) {
     return null;
 };
 
+/**
+ * Gets all the pks
+ * @param schema
+ * @returns {{}}  all the pks in an associative array
+ */
 exports.primaryKeys = function (schema) {
 
     var keys = {};
@@ -81,14 +85,15 @@ exports.primaryKeys = function (schema) {
 
     });
 
-
-    //if (!primary.length && keys.length) {
-    //    primary.push(keys[0]);
-    //}
-
     return keys;
 };
 
+/**
+ * Checks wheter the property is a pk
+ * @param name
+ * @param schema
+ * @returns {*} the property if it's a pk
+ */
 exports.primaryKey = function (name, schema) {
 
     var property = schema.properties[name];
@@ -99,6 +104,12 @@ exports.primaryKey = function (name, schema) {
     return null;
 };
 
+/**
+ * Obtains the first pk of the scema
+ * (the first, so in the future it will be able to support multple pks)
+ * @param schema
+ * @returns {*} an associative array with the first pk
+ */
 exports.firstPrimaryKey = function (schema) {
     var keys = exports.primaryKeys(schema);
     var keysValues = Object.keys(keys);

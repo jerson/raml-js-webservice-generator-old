@@ -1,8 +1,7 @@
 # raml-js-webservice-generator
 RAML webservice generator
 
-[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/jerson/)
-
+[![Flattr this](http://button.flattr.com/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=JairoHonorio&url=https%3A%2F%2Fgithub.com%2Fjahd2602%2Framl-js-webservice-generator)
 
 ##RAML Example
 

@@ -4,7 +4,6 @@ var swig = require('swig'),
     keysParser = require('../../base/parser/keys'),
     typeParser = require('../parser/type');
 
-
 swig.setFilter('parseType', function (propertyName, schemas) {
     return typeParser.type(propertyName, schemas);
 });
@@ -34,9 +33,7 @@ swig.setFilter('isAutoIncrement', function (propertyName, schema) {
     return keyName && keyName.length ? (keyName[0] === propertyName && isAutoIncrement(primaryProperty[keyName])) : false;
 });
 
-
 swig.setFilter('canBeColumn', function (property, schema, schemas) {
-
 
     var canBeColumn = true;
     if (property.type === 'array' && property.items) {
@@ -58,7 +55,6 @@ swig.setFilter('canBeColumn', function (property, schema, schemas) {
     return canBeColumn;
 });
 
-
 swig.setFilter('commentValue', function (property) {
 
     if (['file', 'any', 'null', 'array'].indexOf(property.type) !== -1) {
@@ -66,7 +62,6 @@ swig.setFilter('commentValue', function (property) {
     } else {
         return '';
     }
-
 
 });
 
@@ -101,7 +96,7 @@ swig.setFilter('defaultValue', function (property) {
 
         } else {
             var maxLength = typeParser.length(property);
-            defaultValue = defaultValue.toString().replace(/\'/g,'\\\'')
+            defaultValue = defaultValue.toString().replace(/\'/g, '\\\'')
                 .to(maxLength);
         }
 
@@ -129,7 +124,6 @@ swig.setFilter('autoIncrements', function (schema, nameSchema) {
 
     return values.join('\n');
 
-
 });
 
 swig.setFilter('primaryKeys', function (schema, nameSchema) {
@@ -148,7 +142,6 @@ swig.setFilter('primaryKeys', function (schema, nameSchema) {
     var constraint = util.format('PRIMARY KEY (%s)', values.join(','));
     var indexName = util.format('%s_PK', nameSchema);
     return util.format('ALTER TABLE `%s` ADD CONSTRAINT `%s` %s;', nameSchema, indexName, constraint);
-
 
 });
 
@@ -194,7 +187,6 @@ swig.setFilter('foreignKeys', function (schema, nameSchema, schemas) {
         var indexName = util.format('%s_%s_FK', nameSchema, name);
         var fragment = util.format('FOREIGN KEY (`%s`) REFERENCES %s(`%s`)', name, propertyReference, propertyReferencedKeyName);
         values.push(util.format('ALTER TABLE `%s` ADD CONSTRAINT `%s` %s ON UPDATE CASCADE ON DELETE CASCADE;', nameSchema, indexName, fragment));
-
 
     });
 

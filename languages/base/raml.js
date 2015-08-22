@@ -1,11 +1,10 @@
 var S = require('string'),
     schemaParser = require('./parser/schema');
 
-
 /**
  *
  * @param ast
- * @returns {{}}
+ * @returns {{}} associative array containing all the tables parsed
  */
 exports.parse = function (ast) {
     var schemas = {};
@@ -21,8 +20,8 @@ exports.parse = function (ast) {
     return schemas;
 };
 
-
 /**
+ * Extracts the resources with additional relativeUri properties
  * {
     "relativeUri": "/{newsId}",
     "methods": [
@@ -48,12 +47,12 @@ exports.parse = function (ast) {
   }
 
 
- * @param ast
+ * @param ast the raml object
  * @param resources
- * @returns {*}
+ * @returns [] array containing
  */
 exports.resources = function (ast, resources) {
-
+    // TODO comment the inner workings of this function
     if (!resources) {
         resources = [];
     }
@@ -77,12 +76,10 @@ exports.resources = function (ast, resources) {
 
         value.name = S(value.groupRelativeUri).capitalize().camelize().s;
 
-        //value.suffixRelativeUri = ast.suffixRelativeUri ? ast.suffixRelativeUri : '';
         value.suffixRelativeUri = ast.relativeUri ? ast.relativeUri : value.suffixRelativeUri;
-        value.suffixRelativeUri = value.suffixRelativeUri.replace(value.groupRelativeUri,'');
+        value.suffixRelativeUri = value.suffixRelativeUri.replace(value.groupRelativeUri, '');
         value.suffixRelativeUri = S(value.suffixRelativeUri).replace(/\//g, ' ').dasherize().slugify().s;
         value.suffix = S(value.suffixRelativeUri).capitalize().camelize().s;
-
 
         value.methods = exports.methods(value);
 
@@ -97,12 +94,20 @@ exports.resources = function (ast, resources) {
 
 /**
  *
- * @param ast
+ * @param ast the raml object
  * @returns {Array}
  */
 exports.resourceGroups = function (ast) {
-
     var resources = exports.resources(ast);
+    return exports.resourceGroupsFromResources(resources);
+};
+
+/**
+ * Groups resources by name
+ * @param resources
+ * @returns {[{name:"...",resources:[{}]}]} array of resource groups
+ */
+exports.resourceGroupsFromResources = function (resources) {
     var groupsKeys = {};
     var groups = [];
 
@@ -130,14 +135,13 @@ exports.resourceGroups = function (ast) {
 };
 
 /**
- *
+ * Sets the action variable of each method acording to it's method property
  * @param resource
  * @returns {*}
  */
 exports.methods = function (resource) {
 
     resource.methods.forEach(function (method, index) {
-
 
         switch (method.method) {
             case 'get':
