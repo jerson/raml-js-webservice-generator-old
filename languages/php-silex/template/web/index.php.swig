@@ -14,27 +14,24 @@ $app->get('/', function() {
 });
 
 {% for group in resourceGroups %}
-    $app['{{ group.name }}.controller'] = $app->share(function() use ($app) {
-    return new {{ group.name }}Controller();
-    });
+$app['{{ group.name }}.controller'] = $app->share(function() use ($app) {
+  return new {{ group.name }}Controller();
+});
 {% endfor %}
+{% for group in resourceGroups %}{% for resource in group.resources %}{% for methodObject in resource.methods %}
+$app->{{ methodObject.method }}('{{ resource.parentRelativeUri }}{{ resource.relativeUri }}', '{{ resource.name }}.controller:{{ methodObject.action }}{{ resource.suffix }}Action');
+        {% endfor %}{% endfor %}{% endfor %}
+{% spaceless %}
 
-
-{% for group in resourceGroups %}
-    {% for resource in group.resources %}
-        {% for methodObject in resource.methods %}
-            $app->{{ methodObject.method }}('{{ resource.parentRelativeUri }}{{ resource.relativeUri }}', '{{ resource.name }}.controller:{{ methodObject.action }}{{ resource.suffix }}Action');
-        {% endfor %}
-    {% endfor %}
-{% endfor %}
 
 {#{% for resource in resources %}#}
         {#{% for methodObject in resource.methods %}#}
 {#$app->{{ methodObject.method }}('{{ resource.parentRelativeUri }}{{ resource.relativeUri }}', function() {#}
    {#return '{{ resource.name }}Controller@{{ methodObject.action }}{{ resource.suffix }}';#}
 {#});#}
+
         {#{% endfor %}#}
 {#{% endfor %}#}
 
-
+{% endspaceless %}
 $app->run();

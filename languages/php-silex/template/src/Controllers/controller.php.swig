@@ -11,16 +11,11 @@ class {{ group.name }}Controller
     {
 
     }
-
-{% for resource in group.resources %}
-
-  {% for methodObject in resource.methods %}
+    {% for resource in group.resources %}{% for methodObject in resource.methods %}
     public function {{ methodObject.action }}{{ resource.suffix }}()
     {
     	return new JsonResponse(['name'=>'{{ methodObject.action }} {{ resource.suffix }}']);
-    }
-  {% endfor %}
-
+    }{% endfor %}
 {% endfor %}
 
 }
