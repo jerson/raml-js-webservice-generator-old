@@ -9,6 +9,7 @@ var languages = require('../languages');
 var mkdirp = Bluebird.promisify(require('mkdirp'));
 var writeFile = Bluebird.promisify(require('fs').writeFile);
 var cwd = process.cwd();
+var yargs = require('yargs');
 
 /**
  * Resolve a path to current working directory.
@@ -23,20 +24,23 @@ var base = function (path) {
 /**
  * Parse the command line arguments.
  */
-var argv = require('yargs')
-    .usage([
-        'Generate Schema in any language.',
-        '$0 api.raml --output script.sql --language phpSilex'
-    ].join('\n\n'))
+var argv = yargs.usage([
+    'Generate Schema in any language.',
+    '$0 api.raml --output script.sql --language phpSilex'
+].join('\n\n'))
     .version(pkg.version, 'version')
+
     .alias('e', 'entry')
     .describe('e', 'Entry RAML file')
+
     .demand('o')
     .alias('o', 'output')
     .describe('o', 'Script output dir')
+
     .demand('l')
     .alias('l', 'language')
     .describe('l', 'Set the generated language')
+
     .argv;
 
 /**
@@ -55,21 +59,26 @@ var options = {
  */
 Bluebird.resolve(options)
     .tap(function (options) {
+        // Make sure the language exists
         assert(languages.hasOwnProperty(options.language), 'Unsupported language');
     })
     .then(function (options) {
+        // Load the RAML file
         return ramlParser.loadFile(options.entry);
     })
     .then(function (ast) {
+        // Process the RAML object using the selected language
         return languages[options.language](ast, options);
     })
     .then(function (output) {
+        // Write the resulting output to the fs
         return objectToFs(options.output, output.files);
     })
     .then(function () {
         process.exit(0);
     })
     .catch(function (err) {
+        // Log the error stacktrace
         console.error(err instanceof Error ? (err.stack || err.message) : err);
 
         return process.exit(1);

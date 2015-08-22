@@ -1,11 +1,20 @@
 /**
- * Created by jahd on 22/08/15.
+ * Generates source file from RAML
  */
 
 var swig = require('swig'),
     util = require('util'),
-    raml = require('../base/raml'),
-    template = require('./render/template');
+    raml = require('../base/raml');
+
+/**
+ * Renders the params into the swings templates
+ * @param file path of the output file
+ * @param params template variables to pass to the template
+ * @returns {*}
+ */
+var render = function (file, params) {
+    return swig.renderFile(util.format('%s/template/%s.swig', __dirname, file), params);
+};
 
 module.exports = {
     /**
@@ -15,7 +24,6 @@ module.exports = {
      * @returns {{files: {web: {}, src: {Controllers: {}, Models: {}, Views: {}}, raml: {}}}}
      */
     generate: function (RAMLObject, options) {
-
         var files = {
             web: {},
             src: {
@@ -35,11 +43,11 @@ module.exports = {
         files.raml['RAML-resourceGroups.json'] = JSON.stringify(resourceGroups, null, 2);
 
         // Render the index.php file
-        files.web['index.php'] = template.render('web/index.php', {resources: resources, resourceGroups: resourceGroups});
+        files.web['index.php'] = render('web/index.php', {resources: resources, resourceGroups: resourceGroups});
 
         // Render each *Controller.php file
         resourceGroups.forEach(function (group) {
-            files.src.Controllers[util.format('%sController.php', group.name)] = template.render('src/Controllers/controller.php', {
+            files.src.Controllers[util.format('%sController.php', group.name)] = render('src/Controllers/controller.php', {
                 group: group
             });
         });
@@ -48,6 +56,5 @@ module.exports = {
             files: files
         };
     }
+
 };
-
-

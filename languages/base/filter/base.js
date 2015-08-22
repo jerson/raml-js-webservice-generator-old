@@ -1,22 +1,26 @@
+/**
+ * Loads utility filters to swig
+ */
+
 var swig = require('swig'),
-    S = require('string');
+    string = require('string');
 
 swig.setFilter('capitalize', function (input) {
-    return S(input).capitalize().s;
+    return string(input).capitalize().s;
 });
 
 swig.setFilter('dasherize', function (input) {
-    return S(input).dasherize().s;
+    return string(input).dasherize().s;
 });
 
 swig.setFilter('latinise', function (input) {
-    return S(input).latinise().s;
+    return string(input).latinise().s;
 });
 
 swig.setFilter('slugify', function (input) {
-    return S(input).slugify().s;
+    return string(input).slugify().s;
 });
 
 swig.setFilter('camelize', function (input) {
-    return S(input).camelize().s;
+    return string(input).camelize().s;
 });
