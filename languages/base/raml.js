@@ -6,7 +6,7 @@ var S = require('string'),
  * @param ast
  * @returns {{}} associative array containing all the tables parsed
  */
-exports.parse = function (ast) {
+exports.schemas = function (ast) {
     var schemas = {};
 
     ast.schemas.forEach(function (data) {
@@ -91,6 +91,7 @@ exports.resources = function (ast, resources) {
 
     return resources;
 };
+
 
 /**
  *

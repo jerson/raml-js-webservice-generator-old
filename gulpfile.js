@@ -10,6 +10,7 @@ var run = require('gulp-run');
 var notify = require("gulp-notify");
 var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync');
+var shell = require('gulp-shell');
 
 var getBundleName = function () {
     var version = require('./package.json').version;
@@ -18,6 +19,12 @@ var getBundleName = function () {
 };
 
 var baseFile = './languages/index.js';
+
+gulp.task('watch-node', function () {
+    watch(['./{bin,languages}/*.js', './{languages,lib}/**/*.{js,swig}'], shell.task([
+        'bin/raml-to-webservice.js -e test/fixtures/movies/api.raml -o test/output -l phpSilex'
+    ]));
+});
 
 gulp.task('watch', function () {
     watch(['./{bin,languages}/*.js', './{languages,lib}/**/*.{js,swig}'], function () {

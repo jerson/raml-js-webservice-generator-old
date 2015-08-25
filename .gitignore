@@ -1,5 +1,5 @@
 # Logs
-logs
+/logs
 *.log
 
 # Runtime data
@@ -33,6 +33,4 @@ node_modules
 output
 test/output
 dist
-*.log
-
-test/output
+test/sample
