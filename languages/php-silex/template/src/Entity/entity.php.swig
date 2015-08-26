@@ -13,52 +13,54 @@ use Doctrine\ORM\Mapping as ORM;
 class {{ name | capitalize }}
 {
 
+{% for propertyName,property in schema.properties %}
+    {% if property | canBeColumn(schema,schemas) %}
     /**
-     * @var integer
+     * @var {{ (property | parseType(schemas)) | raw }}
      *
-     * @Column(name="id", type="integer")
-     * @Id
-     * @GeneratedValue(strategy="AUTO")
+     * @Column(name="{{ propertyName }}", type="{{ (property | parseType(schemas)) | raw }}"{%  if (property | parseLength) > 0 %}, length={{ (property | parseLength) }}{% endif %})
+     * {% if (propertyName | isPrimaryKey(schema)) %}@Id{% endif %}
+     * {% if (propertyName | isAutoIncrement(schema)) %}@GeneratedValue(strategy="AUTO"){% endif %}
      */
-    private $id;
+    private ${{ propertyName }};
+    {% endif %}
+{% endfor %}
 
     /**
-     * @var string
-     *
-     * @Column(name="title", type="string", length=255)
+     * Contructor {{ propertyName }}
      */
-    private $title;
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+    {% for propertyName,property in schema.properties %}{% if property | canBeColumn(schema,schemas) and not (propertyName | isPrimaryKey(schema)) %}
+        $this->{{ propertyName }} = {{ property | defaultValue | raw }};{% endif %}{% endfor %}
     }
 
+{% for propertyName,property in schema.properties %}
+    {% if property | canBeColumn(schema,schemas) %}
     /**
-     * Set title
+     * Set {{ propertyName }}
      *
-     * @param string $title
-     * @return Menu
+     * @param string ${{ propertyName }}
+     * @return {{ name | capitalize }}
      */
-    public function setTitle($title)
+    public function setTitle(${{ propertyName }})
     {
-        $this->title = $title;
+        $this->{{ propertyName }} = ${{ propertyName }};
 
         return $this;
     }
 
     /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
+    * Get {{ propertyName }}
+    *
+    * @return string
+    */
+    public function get{{ propertyName | capitalize }}()
     {
-    	return $this->title;
+        return $this->{{ propertyName }};
     }
+{% endif %}
+{% endfor %}
+
+
 }

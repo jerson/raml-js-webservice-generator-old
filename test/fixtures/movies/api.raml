@@ -23,16 +23,7 @@ schemas:
         200:
           body:
             application/json:
-              schema: |
-                { "$schema": "http://json-schema.org/schema",
-                  "type": "object",
-                  "description": "A canonical song",
-                  "properties": {
-                    "title":  { "type": "string" },
-                    "body": { "type": "string" }
-                  },
-                  "required": [ "title", "body" ]
-                }
+              schema: "Movie"
     /top:
             post:
             /{year}:
@@ -41,16 +32,7 @@ schemas:
                   200:
                     body:
                       application/json:
-                        schema: |
-                          { "$schema": "http://json-schema.org/schema",
-                            "type": "object",
-                            "description": "A canonical song",
-                            "properties": {
-                              "title":  { "type": "string" },
-                              "body": { "type": "string" }
-                            },
-                            "required": [ "title", "body" ]
-                          }
+                        schema: "Movie[]"
 /news-list:
   post:
   /{newsId}:

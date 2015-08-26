@@ -38,7 +38,7 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
     * {{ methodObject.action }}{{ resource.suffix }} {{ group.name }}
     *
     */
-    public function {{ methodObject.action }}{{ resource.suffix }}(Application $app, Request $request)
+    public function {{ methodObject.action }}{{ resource.suffix }}(Application $app, Request $request{% if  resource.uriParameters %}, {% for uriParameter in resource.uriParameters %}${{ uriParameter.displayName }}{% endfor %}{% endif %})
     {
         {%  if methodObject.action == 'get' %}
             $em = $app['db.orm.em'];
