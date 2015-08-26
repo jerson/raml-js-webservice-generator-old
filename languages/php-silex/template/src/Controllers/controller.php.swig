@@ -40,9 +40,9 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
     */
     public function {{ methodObject.action }}{{ resource.suffix }}(Application $app, Request $request{% if  resource.uriParameters %}, {% for uriParameter in resource.uriParameters %}${{ uriParameter.displayName }}{% endfor %}{% endif %})
     {
-        {%  if methodObject.action == 'get' %}
+        {%  if methodObject.action == 'show' %}
             $em = $app['db.orm.em'];
-            $entity = $em->getRepository('Entity\{{ group.name }}')->find($id);
+            $entity = $em->getRepository('Entity\{{ methodObject | entityFromMethod }}')->find($id);
 
             if (!$entity) {
                 $app->abort(404, 'No entity found for id '.$id);
@@ -51,9 +51,9 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
             return json_encode($entity);
         {%  elseif methodObject.action == 'create' %}
             $em = $app['db.orm.em'];
-            $entity = new Entity\{{ group.name }}();
+            $entity = new Entity\{{ methodObject | entityFromMethod }}();
 
-            $form = $app['form.factory']->create(new Form\{{ group.name }}Type(), $entity);
+            $form = $app['form.factory']->create(new Form\{{ methodObject | entityFromMethod }}Type(), $entity);
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -67,13 +67,13 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
             return json_encode(['error'=>true]);
         {%  elseif methodObject.action == 'update' %}
             $em = $app['db.orm.em'];
-            $entity = $em->getRepository('Entity\{{ group.name }}')->find($id);
+            $entity = $em->getRepository('Entity\{{ methodObject | entityFromMethod }}')->find($id);
 
             if (!$entity) {
                 $app->abort(404, 'No entity found for id '.$id);
             }
 
-            $form = $app['form.factory']->create(new Form\{{ group.name }}Type(), $entity);
+            $form = $app['form.factory']->create(new Form\{{ methodObject | entityFromMethod }}Type(), $entity);
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -86,7 +86,7 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
             return json_encode(['error'=>true]);
         {%  elseif methodObject.action == 'delete' %}
             $em = $app['db.orm.em'];
-            $entity = $em->getRepository('Entity\{{ group.name }}')->find($id);
+            $entity = $em->getRepository('Entity\{{ methodObject | entityFromMethod }}')->find($id);
 
             if (!$entity) {
                 $app->abort(404, 'No entity found for id '.$id);
@@ -98,7 +98,7 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
             return json_encode(['success'=>true]);
         {%  elseif methodObject.action == 'index' %}
             $em = $app['db.orm.em'];
-            $entities = $em->getRepository('Entity\{{ group.name }}')->findAll();
+            $entities = $em->getRepository('Entity\{{ methodObject | entityFromMethod }}')->findAll();
 
             return json_encode($entities);
         {%  else %}

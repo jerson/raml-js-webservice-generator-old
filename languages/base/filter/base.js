@@ -136,7 +136,7 @@ swig.setFilter('defaultValue', function (property) {
 
         defaultValue = ['number', 'integer'].indexOf(property.type) !== -1 ? parseInt(defaultValue, 10) : defaultValue;
         defaultValue = util.format('\'%s\'', defaultValue);
-    }else{
+    } else {
         defaultValue = 'null';
     }
     return defaultValue;
@@ -159,6 +159,25 @@ swig.setFilter('autoIncrements', function (schema, nameSchema) {
     });
 
     return values.join('\n');
+
+
+});
+
+swig.setFilter('entityFromMethod', function (method) {
+
+    var schema = 'NoEntity';
+    Object.keys(method.responses || {}).forEach(function (name) {
+
+        Object.keys(method.responses[name].body || {}).forEach(function (type) {
+
+            var responseType = method.responses[name].body[type];
+            schema = responseType.schema;
+
+        });
+
+    });
+
+    return schema.replace('[]','');
 
 
 });
