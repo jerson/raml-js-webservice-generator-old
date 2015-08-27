@@ -4,7 +4,7 @@ var util = require('util'),
 
 exports.foreignType = function (property, schemas) {
 
-    var fallbackType = 'INT(11)';
+    var fallbackType = 'integer';
 
     var propertyReferenced = property.ref;
     if (schemas.hasOwnProperty(propertyReferenced)) {
@@ -43,16 +43,7 @@ exports.type = function (property, schemas) {
     var type = '';
 
     if (property.enum) {
-        var values = [];
-        property.enum.forEach(function (value) {
-            values.push(util.format('\'%s\'', value));
-        });
-
-        type = util.format('ENUM (%s)', values.toString());
-    }
-
-    if (type) {
-        return type;
+        return 'string';
     }
 
     var length = exports.length(property);
@@ -74,8 +65,8 @@ exports.type = function (property, schemas) {
             type = exports.foreignType(property, schemas);
             break;
         case 'array':
-            //TODO agregar soporte para arrays
-            type = 'string';
+            type = 'array';
+
             break;
         case 'null':
             type = 'string';

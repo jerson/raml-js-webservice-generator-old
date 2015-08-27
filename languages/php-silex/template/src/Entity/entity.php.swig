@@ -15,12 +15,32 @@ class {{ name | capitalize }}
 
 {% for propertyName,property in schema.properties %}
     {% if property | canBeColumn(schema,schemas) %}
+    {% spaceless %}
+        {% set isObject = property.type=='object' %}
+        {% set relTable = '' %}
+        {% if property.type=='array' and property.items and property.items[0].type=='object' %}
+            {% set relTable = property.items[0] %}
+            {% set isManyToMany = true %}
+        {% else %}
+            {% set isManyToMany = false %}
+        {% endif %}
+        {% if isObject or isManyToMany %}
+            {% set isRelation = true %}
+        {% else %}
+            {% set isRelation = false %}
+        {% endif %}
+    {% endspaceless %}
     /**
-     * @var {{ (property | parseType(schemas)) | raw }}
-     *
-     * @Column(name="{{ propertyName }}", type="{{ (property | parseType(schemas)) | raw }}"{%  if (property | parseLength) > 0 %}, length={{ (property | parseLength) }}{% endif %})
+     * {% if isRelation == false %}@var {{ (property | parseType(schemas)) | raw }}{% endif %}
+     * {% if isRelation == false %}@Column(name="{{ propertyName }}", type="{{ (property | parseType(schemas)) | raw }}"{%  if (property | parseLength) > 0 %}, length={{ (property | parseLength) }}{% endif %}){% endif %}
      * {% if (propertyName | isPrimaryKey(schema)) %}@Id{% endif %}
      * {% if (propertyName | isAutoIncrement(schema)) %}@GeneratedValue(strategy="AUTO"){% endif %}
+     * {% if isObject %}@ManyToOne(targetEntity="{{ property.ref | capitalize }}"){% endif %}
+     * {% if isManyToMany  %}@ManyToMany(targetEntity="{{ (relTable.ref || relTable.name) | capitalize }}")
+     * @JoinTable(name="{{ name }}_{{ (relTable.ref || relTable.name) }}",
+     *      joinColumns={@JoinColumn(name="{{ name }}_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="{{ (relTable.ref || relTable.name) }}_id", referencedColumnName="id", unique=true)}
+     *      ){% endif %}
      */
     private ${{ propertyName }};
     {% endif %}

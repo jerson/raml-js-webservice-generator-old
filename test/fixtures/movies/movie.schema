@@ -59,24 +59,6 @@
       "name": "date_released",
       "default": "2014-11-21T00:00:00-0500"
     },
-    "date_released_timestamp": {
-      "id": "http://jsonschema.net/date_released_timestamp",
-      "type": "timestamp",
-      "minLength": 1,
-      "title": "Date_released schema.",
-      "description": "An explanation about the puropose of this instance described by this schema.",
-      "name": "date_released",
-      "default": "2014-11-21T00:00:00-0500"
-    },
-    "date_released_time": {
-      "id": "http://jsonschema.net/date_released_time",
-      "type": "time",
-      "minLength": 1,
-      "title": "Date_released schema.",
-      "description": "An explanation about the puropose of this instance described by this schema.",
-      "name": "date_released",
-      "default": "2014-11-21T00:00:00-0500"
-    },
     "year": {
       "id": "http://jsonschema.net/year",
       "type": "integer",

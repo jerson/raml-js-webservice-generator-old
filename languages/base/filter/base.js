@@ -77,7 +77,7 @@ swig.setFilter('canBeColumn', function (property, schema, schemas) {
         property.items.forEach(function (item) {
 
             if (item.type === 'object') {
-                canBeColumn = false;
+                canBeColumn = true;
                 return false;
             }
         });
