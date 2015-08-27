@@ -3,7 +3,7 @@
 RAML webservice generator .. is still in development!!
 
 See [Sample Project generated](https://github.com/jerson/raml-js-webservice-generator-example) 
-https://github.com/jerson/raml-js-webservice-generator-example
+
 
 
 ##RAML Example
