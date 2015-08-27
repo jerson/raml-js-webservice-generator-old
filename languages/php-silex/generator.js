@@ -35,6 +35,7 @@ module.exports = {
                 Controller: {},
                 Entity: {},
                 Form: {
+                    DataTransformer: {},
                     Extensions: {
                         Doctrine: {
                             Bridge: {}
@@ -70,6 +71,7 @@ module.exports = {
         files.var.cache['.gitignore'] = render('var/cache/.gitignore');
         files.var.logs['.gitignore'] = render('var/logs/.gitignore');
 
+        files.src.Form.DataTransformer['EntityToIdTransformer.php'] = render('src/Form/DataTransformer/EntityToIdTransformer.php');
         files.src.Form.Extensions.Doctrine.Bridge['ManagerRegistry.php'] = render('src/Form/Extensions/Doctrine/Bridge/ManagerRegistry.php');
 
         files.web['index.php'] = render('web/index.php', {resources: resources, resourceGroups: resourceGroups});
@@ -93,7 +95,7 @@ module.exports = {
 
         Object.keys(schemas).forEach(function (name) {
             var schema = schemas[name];
-            var fileName = string('_'+name).camelize().s;
+            var fileName = string('_' + name).camelize().s;
             files.src.Entity[util.format('%s.php', fileName)] = render('src/Entity/entity.php', {
                 schema: schema,
                 schemas: schemas,
@@ -235,7 +237,7 @@ module.exports = {
 
             if (!relation.child.exist && Object.keys(relation.child.schema.properties).length) {
 
-                var fileName = string('_'+relation.child.name).camelize().s;
+                var fileName = string('_' + relation.child.name).camelize().s;
 
                 files.src.Entity[util.format('%s.php', fileName)] = render('src/Entity/entity.php', {
                     schema: relation.child.schema,

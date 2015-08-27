@@ -80,7 +80,7 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
                 return $app->redirect($app['url_generator']->generate('{{ group.name }}_showId', array('id' => $entity->getId())));
             }
 
-            return new Response($app['serializer']->serialize(['error'=>$form->getErrorsAsString()], 'json'), 200, array(
+            return new Response($app['serializer']->serialize(['error'=>$form->getErrorsAsString(),'data'=>$form->getViewData()], 'json'), 200, array(
                 'Content-Type' => $request->getMimeType('json')
             ));
         {%  elseif methodObject.action == 'update' %}
@@ -100,7 +100,7 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
                 return $app->redirect($app['url_generator']->generate('{{ group.name }}_showId', array('id' => $entity->getId())));
             }
 
-            return new Response($app['serializer']->serialize(['error'=>$form->getErrorsAsString()], 'json'), 200, array(
+            return new Response($app['serializer']->serialize(['error'=>$form->getErrorsAsString(),'data'=>$form->getViewData()], 'json'), 200, array(
             'Content-Type' => $request->getMimeType('json')
             ));
         {%  elseif methodObject.action == 'delete' %}

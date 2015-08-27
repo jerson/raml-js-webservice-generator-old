@@ -52,7 +52,7 @@ class {{ name | capitalize }}
     public function __construct()
     {
     {% for propertyName,property in schema.properties %}{% if property | canBeColumn(schema,schemas) and not (propertyName | isPrimaryKey(schema)) %}
-       $this->{{ propertyName }} = {{ property | defaultValue | raw }};{% endif %}{% endfor %}
+       //$this->{{ propertyName }} = {{ property | defaultValue | raw }};{% endif %}{% endfor %}
     }
 
 {% for propertyName,property in schema.properties %}
