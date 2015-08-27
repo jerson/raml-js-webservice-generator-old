@@ -32,7 +32,7 @@ class {{ name | capitalize }}
     {% endspaceless %}
     /**
      * {% if isRelation == false %}@var {{ (property | parseType(schemas)) | raw }}{% endif %}
-     * {% if isRelation == false %}@Column(name="{{ propertyName }}", type="{{ (property | parseType(schemas)) | raw }}"{%  if (property | parseLength) > 0 %}, length={{ (property | parseLength) }}{% endif %}){% endif %}
+     * {% if isRelation == false %}@Column(name="{{ propertyName }}", unique={% if property.unique  %}true{% else%}false{% endif %}, nullable={% if (propertyName | isRequired(schema)) %}false{% else%}true{% endif %}, type="{{ (property | parseType(schemas)) | raw }}"{%  if (property | parseLength) > 0 %}, length={{ (property | parseLength) }}{% endif %}){% endif %}
      * {% if (propertyName | isPrimaryKey(schema)) %}@Id{% endif %}
      * {% if (propertyName | isAutoIncrement(schema)) %}@GeneratedValue(strategy="AUTO"){% endif %}
      * {% if isObject %}@ManyToOne(targetEntity="{{ property.ref | capitalize }}"){% endif %}
@@ -52,7 +52,7 @@ class {{ name | capitalize }}
     public function __construct()
     {
     {% for propertyName,property in schema.properties %}{% if property | canBeColumn(schema,schemas) and not (propertyName | isPrimaryKey(schema)) %}
-        $this->{{ propertyName }} = {{ property | defaultValue | raw }};{% endif %}{% endfor %}
+       $this->{{ propertyName }} = {{ property | defaultValue | raw }};{% endif %}{% endfor %}
     }
 
 {% for propertyName,property in schema.properties %}

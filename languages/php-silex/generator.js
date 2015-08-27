@@ -62,7 +62,7 @@ module.exports = {
         // Render the index.php file
         files['composer.json'] = render('composer.json');
 
-        files.bin['console'] = render('bin/console');
+        files.bin.console = render('bin/console');
 
         files.config['dev.php'] = render('config/dev.php');
         files.config['prod.php'] = render('config/prod.php');
@@ -93,7 +93,7 @@ module.exports = {
 
         Object.keys(schemas).forEach(function (name) {
             var schema = schemas[name];
-            var fileName = string(name).capitalize().s;
+            var fileName = string('_'+name).camelize().s;
             files.src.Entity[util.format('%s.php', fileName)] = render('src/Entity/entity.php', {
                 schema: schema,
                 schemas: schemas,
@@ -235,7 +235,7 @@ module.exports = {
 
             if (!relation.child.exist && Object.keys(relation.child.schema.properties).length) {
 
-                var fileName = string(relation.child.name).capitalize().s;
+                var fileName = string('_'+relation.child.name).camelize().s;
 
                 files.src.Entity[util.format('%s.php', fileName)] = render('src/Entity/entity.php', {
                     schema: relation.child.schema,

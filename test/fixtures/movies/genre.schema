@@ -58,7 +58,6 @@
   "required": [
     "id",
     "name",
-    "slug",
-    "total"
+    "slug"
   ]
 }

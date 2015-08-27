@@ -10,7 +10,7 @@ var swig = require('swig'),
 
 
 swig.setFilter('capitalize', function (input) {
-    return string(input).capitalize().s;
+    return string('_'+input).camelize().s;
 });
 
 swig.setFilter('dasherize', function (input) {

@@ -82,9 +82,6 @@
     "id",
     "name",
     "slug",
-    "country",
-    "birthday",
-    "biography",
     "image"
   ]
 }
