@@ -8,7 +8,7 @@ RAML webservice generator .. is still in development!!
 
    #%RAML 0.8
     
-   title: World Music API
+   title: World Movie API
    baseUri: http://example.api.com/{version}
    version: v1
    traits:
