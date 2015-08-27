@@ -35,7 +35,6 @@ module.exports = {
                 Controller: {},
                 Entity: {},
                 Form: {
-                    DataTransformer: {},
                     Extensions: {
                         Doctrine: {
                             Bridge: {}
