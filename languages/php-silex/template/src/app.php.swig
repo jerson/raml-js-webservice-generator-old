@@ -11,6 +11,7 @@ use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use ORM\Provider\DoctrineORMServiceProvider;
+use Silex\Provider\SerializerServiceProvider;
 
 $app = new Application();
 
@@ -20,6 +21,7 @@ $app->register(new ServiceControllerServiceProvider());
 $app->register(new TwigServiceProvider());
 $app->register(new FormServiceProvider());
 $app->register(new HttpFragmentServiceProvider());
+$app->register(new SerializerServiceProvider());
 
 $app->register(new TranslationServiceProvider(), array(
     'translator.domains' => array(),

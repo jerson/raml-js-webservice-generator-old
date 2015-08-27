@@ -79,7 +79,7 @@ exports.resources = function (ast, resources) {
         value.suffixRelativeUri = ast.relativeUri ? ast.relativeUri : value.suffixRelativeUri;
         value.suffixRelativeUri = value.suffixRelativeUri.replace(value.groupRelativeUri, '');
         value.suffixRelativeUri = S(value.suffixRelativeUri).replace(/\//g, ' ').dasherize().slugify().s;
-        value.suffix = S(value.suffixRelativeUri).capitalize().camelize().s;
+        value.suffix = S(value.suffixRelativeUri +'-'+ value.relativeUriPathSegments.join('-').replace(/({|})/g, ' ')).capitalize().camelize().s;
 
         value.methods = exports.methods(value);
 

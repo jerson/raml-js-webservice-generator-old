@@ -75,10 +75,10 @@ exports.type = function (property, schemas) {
             break;
         case 'array':
             //TODO agregar soporte para arrays
-            type = 'VARCHAR(250)';
+            type = 'string';
             break;
         case 'null':
-            type = 'CHAR(1)';
+            type = 'string';
             break;
         case 'any':
             type = 'string';
@@ -89,7 +89,7 @@ exports.type = function (property, schemas) {
             type = 'string';
             break;
         case 'date':
-            type = 'date';
+            type = 'datetime';
             break;
         case 'datetime':
             type = 'datetime';
@@ -98,7 +98,7 @@ exports.type = function (property, schemas) {
             type = 'datetime';
             break;
         case 'timestamp':
-            type = 'timestamp';
+            type = 'datetime';
             break;
         case 'file':
             type = 'string';

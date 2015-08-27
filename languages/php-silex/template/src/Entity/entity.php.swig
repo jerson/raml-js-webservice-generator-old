@@ -43,7 +43,7 @@ class {{ name | capitalize }}
      * @param string ${{ propertyName }}
      * @return {{ name | capitalize }}
      */
-    public function setTitle(${{ propertyName }})
+    public function set{{ propertyName | capitalize }}(${{ propertyName }})
     {
         $this->{{ propertyName }} = ${{ propertyName }};
 

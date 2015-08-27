@@ -21,13 +21,15 @@ class {{ name | capitalize }}Type extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
+            'csrf_protection'   => false,
+            'allow_extra_fields' => false,
             'data_class' => 'Entity\{{ name | capitalize }}',
         ));
     }
 
     public function getName()
     {
-        return '{{ name }}';
+       // return '{{ name }}';
     }
 
 }

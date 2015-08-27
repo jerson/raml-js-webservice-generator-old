@@ -40,7 +40,7 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
     */
     public function {{ methodObject.action }}{{ resource.suffix }}(Application $app, Request $request{% if  resource.uriParameters %}, {% for uriParameter in resource.uriParameters %}${{ uriParameter.displayName }}{% endfor %}{% endif %})
     {
-        {%  if methodObject.action == 'show' %}
+        {%  if methodObject.action == 'show' and resource.uriParameters %}
             $em = $app['db.orm.em'];
             $entity = $em->getRepository('Entity\{{ methodObject | entityFromMethod }}')->find($id);
 
@@ -48,7 +48,23 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
                 $app->abort(404, 'No entity found for id '.$id);
             }
 
-            return json_encode($entity);
+            return new Response($app['serializer']->serialize($entity, 'json'), 200, array(
+            'Content-Type' => $request->getMimeType('json')
+            ));
+        {%  elseif methodObject.action == 'show' and not resource.uriParameters %}
+            $em = $app['db.orm.em'];
+            $entities = $em->getRepository('Entity\{{ methodObject | entityFromMethod }}')->findAll();
+
+            return new Response($app['serializer']->serialize($entities, 'json'), 200, array(
+            'Content-Type' => $request->getMimeType('json')
+            ));
+        {%  elseif methodObject.action == 'index' %}
+            $em = $app['db.orm.em'];
+            $entities = $em->getRepository('Entity\{{ methodObject | entityFromMethod }}')->findAll();
+
+            return new Response($app['serializer']->serialize($entities, 'json'), 200, array(
+            'Content-Type' => $request->getMimeType('json')
+            ));
         {%  elseif methodObject.action == 'create' %}
             $em = $app['db.orm.em'];
             $entity = new Entity\{{ methodObject | entityFromMethod }}();
@@ -61,10 +77,12 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
                 $em->persist($entity);
                 $em->flush();
 
-                return $app->redirect($app['url_generator']->generate('acme_show', array('id' => $entity->getId())));
+                return $app->redirect($app['url_generator']->generate('{{ group.name }}_showId', array('id' => $entity->getId())));
             }
 
-            return json_encode(['error'=>true]);
+            return new Response($app['serializer']->serialize(['error'=>$form->getErrorsAsString()], 'json'), 200, array(
+                'Content-Type' => $request->getMimeType('json')
+            ));
         {%  elseif methodObject.action == 'update' %}
             $em = $app['db.orm.em'];
             $entity = $em->getRepository('Entity\{{ methodObject | entityFromMethod }}')->find($id);
@@ -78,12 +96,13 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
 
             if ($form->isValid()) {
                 $em->flush();
-                $app['session']->getFlashBag()->add('success', 'Entity update successfull!');
 
-                return $app->redirect($app['url_generator']->generate('acme_show', array('id' => $entity->getId())));
+                return $app->redirect($app['url_generator']->generate('{{ group.name }}_showId', array('id' => $entity->getId())));
             }
 
-            return json_encode(['error'=>true]);
+            return new Response($app['serializer']->serialize(['error'=>$form->getErrorsAsString()], 'json'), 200, array(
+            'Content-Type' => $request->getMimeType('json')
+            ));
         {%  elseif methodObject.action == 'delete' %}
             $em = $app['db.orm.em'];
             $entity = $em->getRepository('Entity\{{ methodObject | entityFromMethod }}')->find($id);
@@ -95,12 +114,9 @@ class {{ group.name }}Controller implements ControllerProviderInterface {
             $em->remove($entity);
             $em->flush();
 
-            return json_encode(['success'=>true]);
-        {%  elseif methodObject.action == 'index' %}
-            $em = $app['db.orm.em'];
-            $entities = $em->getRepository('Entity\{{ methodObject | entityFromMethod }}')->findAll();
-
-            return json_encode($entities);
+            return new Response($app['serializer']->serialize(['success'=>true], 'json'), 200, array(
+            'Content-Type' => $request->getMimeType('json')
+            ));
         {%  else %}
             //TODO You need to implement this!!!
             return json_encode(['error'=>'You need to implement this!!!']);
