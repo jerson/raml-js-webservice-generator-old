@@ -32,11 +32,11 @@ class {{ name | capitalize }}
     {% endspaceless %}
     /**
      * {% if isRelation == false %}@var {{ (property | parseType(schemas)) | raw }}{% endif %}
-     * {% if isRelation == false %}@Column(name="{{ propertyName }}", unique={% if property.unique  %}true{% else%}false{% endif %}, nullable={% if (propertyName | isRequired(schema)) %}false{% else%}true{% endif %}, type="{{ (property | parseType(schemas)) | raw }}"{%  if (property | parseLength) > 0 %}, length={{ (property | parseLength) }}{% endif %}){% endif %}
+     * {% if isRelation == false %}@Column(name="{{ propertyName }}", unique={% if property.unique  %}true{% else%}false{% endif %}, nullable={% if (propertyName | isRequired(schema)) %}false{% else%}true{% endif %}, type="{{ (property | parseDoctrineType(schemas)) | raw }}"{%  if (property | parseLength) > 0 %}, length={{ (property | parseLength) }}{% endif %}){% endif %}
      * {% if (propertyName | isPrimaryKey(schema)) %}@Id{% endif %}
      * {% if (propertyName | isAutoIncrement(schema)) %}@GeneratedValue(strategy="AUTO"){% endif %}
-     * {% if isObject %}@ManyToOne(targetEntity="{{ property.ref | capitalize }}"){% endif %}
-     * {% if isManyToMany  %}@ManyToMany(targetEntity="{{ (relTable.ref || relTable.name) | capitalize }}")
+     * {% if isObject %}@ManyToOne(targetEntity="{{ property.ref | capitalize }}"),cascade={"persist"}{% endif %}
+     * {% if isManyToMany  %}@ManyToMany(targetEntity="{{ (relTable.ref || relTable.name) | capitalize }}",cascade={"persist"})
      * @JoinTable(name="{{ name }}_{{ (relTable.ref || relTable.name) }}",
      *      joinColumns={@JoinColumn(name="{{ name }}_id", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="{{ (relTable.ref || relTable.name) }}_id", referencedColumnName="id", unique=true)}

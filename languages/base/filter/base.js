@@ -33,6 +33,13 @@ swig.setFilter('camelize', function (input) {
 swig.setFilter('parseType', function (propertyName, schemas) {
     return typeParser.type(propertyName, schemas);
 });
+swig.setFilter('parseDoctrineType', function (propertyName, schemas) {
+    var type =  typeParser.type(propertyName, schemas);
+    if(type==='array'){
+        return 'simple_array';
+    }
+    return type;
+});
 
 swig.setFilter('parseLength', function (propertyName) {
     return typeParser.length(propertyName);

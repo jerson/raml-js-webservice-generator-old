@@ -217,3 +217,55 @@ schemas:
           body:
             application/json:
               schema: "Genre"
+/link_watch:
+  post:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: "LinkWatch"
+  /{id}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              schema: "LinkWatch"
+    put:
+      responses:
+        200:
+          body:
+            application/json:
+              schema: "LinkWatch"
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              schema: "LinkWatch"
+/link_download:
+  post:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: "LinkDownload"
+  /{id}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              schema: "LinkDownload"
+    put:
+      responses:
+        200:
+          body:
+            application/json:
+              schema: "LinkDownload"
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              schema: "LinkDownload"

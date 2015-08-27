@@ -467,21 +467,10 @@
     "id",
     "name",
     "slug",
-    "date_released",
-    "year",
     "trailer",
     "sinopsis",
-    "musicians",
-    "screenwriters",
-    "directors",
-    "producers",
     "actors",
     "genres",
-    "links_watch",
-    "links_download",
-    "views",
-    "rating",
-    "next_release",
-    "image"
+    "links_download"
   ]
 }

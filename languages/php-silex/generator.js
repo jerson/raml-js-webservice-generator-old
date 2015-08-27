@@ -71,7 +71,6 @@ module.exports = {
         files.var.cache['.gitignore'] = render('var/cache/.gitignore');
         files.var.logs['.gitignore'] = render('var/logs/.gitignore');
 
-        files.src.Form.DataTransformer['EntityToIdTransformer.php'] = render('src/Form/DataTransformer/EntityToIdTransformer.php');
         files.src.Form.Extensions.Doctrine.Bridge['ManagerRegistry.php'] = render('src/Form/Extensions/Doctrine/Bridge/ManagerRegistry.php');
 
         files.web['index.php'] = render('web/index.php', {resources: resources, resourceGroups: resourceGroups});
