@@ -67,6 +67,7 @@
   },
   "dependencies": {
     "folderify": "^0.6.0",
+    "gulp-atom-electron": "^0.17.2",
     "include-folder": "^0.7.0",
     "raml-parser": "git+https://github.com/jerson/raml-js-parser.git",
     "string": "^3.0.0",

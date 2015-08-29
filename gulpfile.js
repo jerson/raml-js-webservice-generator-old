@@ -13,6 +13,7 @@ var browserSync = require('browser-sync');
 var shell = require('gulp-shell');
 var electron = require('gulp-electron');
 var packageJson = require('./package.json');
+//var electron = require('gulp-atom-electron');
 
 var getBundleName = function () {
     var version = require('./package.json').version;
@@ -95,29 +96,29 @@ gulp.task('build:all', ['build:js', 'build:apps']);
 
 gulp.task('build:apps', function () {
 
-    gulp.src("")
+    return gulp.src("")
         .pipe(electron({
             src: './src',
             packageJson: packageJson,
             release: './release',
             cache: './cache',
-            version: packageJson.version,
+            version: 'v0.31.1',
             packaging: true,
-            platforms: ['darwin'],
-            //platforms: ['win32-ia32', 'darwin-x64', 'linux-ia32'],
+            //platforms: ['darwin-x64'],
+            platforms: ['win32-ia32', 'darwin-x64', 'linux-ia32'],
             platformResources: {
                 darwin: {
                     CFBundleDisplayName: packageJson.name,
                     CFBundleIdentifier: packageJson.name,
                     CFBundleName: packageJson.name,
                     CFBundleVersion: packageJson.version,
-                    icon: 'ui/generator/favicon.icns'
+                    icon: 'src/ui/generator/favicon.icns'
                 },
                 win: {
                     "version-string": packageJson.version,
                     "file-version": packageJson.version,
                     "product-version": packageJson.version,
-                    "icon": 'ui/generator/favicon.ico'
+                    "icon": 'src/ui/generator/favicon.ico'
                 }
             }
         }))
