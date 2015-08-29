@@ -34,3 +34,8 @@ output
 test/output
 dist
 test/sample
+/cache
+/release
+bower_components
+app.css
+*.map

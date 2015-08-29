@@ -1,0 +1,185 @@
+body {
+  padding: 10px;
+  overflow: hidden;
+  //width: 400px !important;
+  //height: 400px !important;
+  position: relative;
+  -webkit-app-region: drag;
+}
+
+button, select, input, .titlebar-stoplight, .titlebar-minimize, .titlebar-close, a {
+  -webkit-app-region: no-drag;
+}
+
+.error-step2,
+.error-step3,
+.error-step1 {
+  display: none;
+}
+
+.card-title {
+
+  em {
+    font-size: 0.7em;
+    text-transform: none;
+    font-style: normal;
+    color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.file-field input.file-path {
+  width: 290px;
+  padding-left: 5px;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+
+  height: 2.5rem;
+}
+
+.file-field .btn, .file-field .btn-large {
+  float: left;
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+
+.btn-again {
+  color: #666 !important;
+}
+
+.card {
+
+  .card-action {
+    padding: 20px 0 0 0 !important;
+  }
+}
+
+.loading {
+  display: none;
+}
+
+#step2,
+#step3,
+#step4 {
+  display: none;
+}
+
+#step1,
+#step2,
+#step3 {
+  //position: absolute;
+  //left: 0;
+}
+
+.btn-link {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  color: #444 !important;
+}
+
+.card .card-content {
+  padding: 0 !important;
+}
+
+.titlebar {
+  cursor: default;
+  padding: 0 3px;
+  //background-color: #f6f6f6;
+}
+
+.titlebar.webkit-draggable {
+  -webkit-app-region: drag;
+}
+
+.titlebar-stoplight {
+  float: right;
+}
+
+.titlebar-title {
+  float: left;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.8em;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  text-shadow: 1px 1px 0px #fff;
+}
+
+.titlebar:after,
+.titlebar-stoplight:after {
+  content: ' ';
+  display: table;
+  clear: both;
+}
+
+.titlebar-stoplight:hover .titlebar-close {
+  background-position: -26px 0;
+}
+
+.titlebar-stoplight:hover .titlebar-minimize {
+  background-position: 0 0;
+}
+
+.titlebar.alt .titlebar-stoplight:hover .titlebar-close {
+  background-position: -104px 0;
+}
+
+.titlebar.alt .titlebar-stoplight:hover .titlebar-minimize {
+  background-position: -78px 0;
+}
+
+.titlebar-close,
+.titlebar-minimize {
+  cursor: pointer;
+  float: left;
+  margin: 6px 4px;
+  background-repeat: no-repeat;
+  background-image: url(../images/stoplight.png);
+  background-size: auto 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+}
+
+.titlebar.webkit-draggable .titlebar-close,
+.titlebar.webkit-draggable .titlebar-minimize {
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-close {
+  position: relative;
+  margin-left: 6px;
+  background-position: -65px 0;
+}
+
+.titlebar-minimize {
+  position: relative;
+  background-position: -39px 0;
+}
+
+.titlebar-close:active::after,
+.titlebar-minimize:active::after {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  background: rgba(0, 0, 0, .25);
+  border-radius: 100%;
+}
+
+* {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+
+  /*
+    Introduced in IE 10.
+    See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+  */
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -2,7 +2,7 @@
   "name": "raml-js-webservice-generator",
   "version": "1.0.0",
   "description": "RAML WebService generator",
-  "main": "bin/raml-to-webservice.js",
+  "main": "src/ui/main.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jerson/raml-js-webservice-generator.git"
@@ -33,7 +33,7 @@
   ],
   "scripts": {
     "test": "gulp test",
-    "build": "gulp build"
+    "build": "gulp build:js"
   },
   "pre-commit": [
     "build"
@@ -48,6 +48,7 @@
     "gulp": "^3.8.8",
     "gulp-browserify": "^0.5.1",
     "gulp-connect": "^2.2.0",
+    "gulp-electron": "0.0.9",
     "gulp-jshint": "^1.8.4",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.0",

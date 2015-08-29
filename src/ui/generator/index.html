@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAML Code Generator</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/Materialize/dist/css/materialize.css">
+    <link rel="stylesheet" href="style/app.css">
+</head>
+<body>
+
+<div class="card">
+
+    <div class="titlebar">
+        <div class="titlebar-stoplight">
+            <div class="titlebar-minimize"></div>
+            <div class="titlebar-close"></div>
+        </div>
+        <div class="titlebar-title">RAML Code Generador</div>
+    </div>
+
+    <form id="generator" enctype="multipart/form-data">
+
+        <div class="row" id="step1">
+            <div class="col s12">
+
+                <div class="card-content">
+                <span class="card-title grey-text text-darken-4">Step 1:
+                    <em>Choose RAML file</em>
+                </span>
+
+                    <div class="card-panel red lighten-1 error-step1">
+                        <span class="white-text text-accent-1">Required field</span>
+                    </div>
+
+                    <div class="row">
+                        <div class="file-field input-field">
+                            <input class="file-path validate" type="text"/>
+
+                            <div class="btn">
+                                <span>Choose</span>
+                                <input type="file" name="inputFile" accept=".raml"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="card-action">
+                    <button class="btn waves-effect waves-light goto-step2" type="button">Next
+                        <i class="material-icons"></i>
+                    </button>
+
+                    <button class="btn btn-link waves-effect right exit" type="button">Exit
+                        <i class="material-icons"></i>
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row" id="step2">
+            <div class="col s12">
+
+                <div class="card-content">
+                <span class="card-title grey-text text-darken-4">Step 2:
+                    <em>Choose what you want to generate</em>
+                </span>
+
+                    <div class="card-panel red lighten-1 error-step2">
+                        <span class="white-text text-accent-1">Required field</span>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <!--<label>Template</label>-->
+                            <select class="browser-default" name="template">
+                                <option value="" disabled>Choose your template</option>
+                                <option value="phpSilex" selected>PHP + Silex Application</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="card-action">
+                    <button class="btn waves-effect waves-light goto-step3" type="button">Next
+                        <i class="material-icons"></i>
+                    </button>
+
+                    <button class="btn btn-link waves-effect right exit" type="button">Cancel
+                        <i class="material-icons"></i>
+                    </button>
+                    <button class="btn btn-link waves-effect right goto-step1" type="button">Back
+                        <i class="material-icons"></i>
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row" id="step3">
+            <div class="col s12">
+
+                <div class="card-content">
+                <span class="card-title grey-text text-darken-4">Step 3:
+                    <em>Choose the output directory</em>
+                </span>
+
+                    <div class="card-panel red lighten-1 error-step3">
+                        <span class="white-text text-accent-1">Required field</span>
+                    </div>
+
+                    <div class="row final-container">
+                        <div class="file-field input-field">
+                            <input class="file-path validate" type="text"/>
+
+                            <div class="btn">
+                                <span>Choose</span>
+                                <input type="file" name="outputDirectory" webkitdirectory/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="progress loading">
+                        <div class="indeterminate"></div>
+                    </div>
+
+
+                </div>
+                <div class="card-action">
+                    <button type="submit" class="btn waves-effect waves-light" id="submit-form">Generate
+                        <i class="material-icons"></i>
+                    </button>
+                    <button class="btn btn-link waves-effect right exit" type="button">Cancel
+                        <i class="material-icons"></i>
+                    </button>
+
+                    <button class="btn btn-link waves-effect right goto-step4" type="button">Back
+                        <i class="material-icons"></i>
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row" id="step4">
+            <div class="col s12">
+
+                <div class="card-content">
+                <span class="card-title grey-text text-darken-4">Step 4:
+                    <em>Enjoy!</em>
+                </span>
+
+                    <div class="card-panel  green">
+                        <span class="white-text text-accent-1">Code Generated, enjoy!!</span>
+                    </div>
+                    <blockquote>
+                        See our code on <a target="_blank" href="#" id="github-link">Github</a>.
+                    </blockquote>
+
+
+                </div>
+                <div class="card-action">
+                    <button type="button"
+                            class="btn btn-again  waves-effect text-black waves-light grey lighten-4 goto-step1">Start
+                        again
+                        <i class="material-icons"></i>
+                    </button>
+                    <button class="btn btn-link waves-effect right exit" type="button">Exit
+                        <i class="material-icons"></i>
+                    </button>
+
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+<script>
+    window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.js');
+    window.Hammer = require('./bower_components/hammerjs/hammer.js');
+</script>
+<script src="bower_components/Materialize/dist/js/materialize.js"></script>
+
+
+</body>
+<script>
+
+    (function () {
+
+        var remote = require('remote');
+        var BrowserWindow = remote.require('browser-window');
+//        var languages = require('../../languages');
+//        var assert = require('assert');
+//        var Bluebird = require('bluebird');
+//        var resolve = require('path').resolve;
+//        var ramlParser = require('raml-parser');
+//        var mkdirp = Bluebird.promisify(require('mkdirp'));
+//        var writeFile = Bluebird.promisify(require('fs').writeFile);
+
+
+        $steps = $('#generator > .row');
+
+        $('.goto-step1').on('click', function (event) {
+            setTimeout(function () {
+                $steps.hide();
+                $('#step1').fadeIn();
+            }, 200);
+
+        });
+        $('.goto-step2').on('click', function (event) {
+            setTimeout(function () {
+                $steps.hide();
+                $('#step2').fadeIn();
+            }, 200);
+
+        });
+        $('.goto-step3').on('click', function (event) {
+            setTimeout(function () {
+                $steps.hide();
+                $('.final-container').show();
+                $('.loading').hide();
+                $('#step3').fadeIn();
+            }, 200);
+
+        });
+        $('.goto-step4').on('click', function (event) {
+            setTimeout(function () {
+                $steps.hide();
+                $('#step4').fadeIn();
+            }, 200);
+
+        });
+
+        $('.titlebar-minimize').on('click', function (event) {
+            var window = BrowserWindow.getFocusedWindow();
+            window.minimize();
+        });
+
+        $('.titlebar-close,.exit').on('click', function (event) {
+            var window = BrowserWindow.getFocusedWindow();
+            window.close();
+        });
+
+        $('#github-link').on('click', function (event) {
+            event.preventDefault();
+            console.log('open github link');
+            require('shell').openExternal('https://github.com/jahd2602/raml-js-webservice-generator');
+        });
+
+
+        var inputFile = '';
+        var outputDirectory = '';
+        var template = '';
+
+        $('#generator').find('input[name=inputFile]').change(function (event) {
+            var theFiles = event.target.files;
+            inputFile = theFiles[0].path;
+            console.log(inputFile);
+        });
+
+        $('#generator').find('input[name=outputDirectory]').change(function (event) {
+            var theFiles = event.target.files;
+            outputDirectory = theFiles[0].path;
+            console.log(outputDirectory);
+        });
+
+
+        $('#submit-form').on('click', function (event) {
+            event.preventDefault();
+
+            $('.loading').show();
+            $('.final-container').hide();
+
+            var template = $('#generator').find('select[name=template]').val();
+
+            if (!inputFile) {
+                $('.goto-step1').trigger('click');
+                $('.error-step1').fadeIn();
+
+                setTimeout(function () {
+                    $('.error-step1').fadeOut();
+                }, 2000);
+            } else if (!outputDirectory) {
+                $('.goto-step3').trigger('click');
+                $('.error-step3').fadeIn();
+
+                setTimeout(function () {
+                    $('.error-step3').fadeOut();
+                }, 2000);
+            } else if (!template) {
+                $('.goto-step2').trigger('click');
+                $('.error-step2').fadeIn();
+
+                setTimeout(function () {
+                    $('.error-step2').fadeOut();
+                }, 2000);
+            }
+
+            console.log($('form').serializeArray());
+
+
+            return;
+
+            /**
+             * Pull out options into an object for passing into generator.
+             *
+             * @type {Object}
+             */
+            var options = {
+                entry: inputFile,
+                output: outputDirectory,
+                language: template
+            };
+
+            /**
+             * Generate the API client.
+             */
+            Bluebird.resolve(options)
+                    .tap(function (options) {
+                        // Make sure the language exists
+                        assert(languages.hasOwnProperty(options.language), 'Unsupported language');
+                    })
+                    .then(function (options) {
+                        // Load the RAML file
+                        return ramlParser.loadFile(options.entry);
+                    })
+                    .then(function (ast) {
+                        // Process the RAML object using the selected language
+                        return languages[options.language](ast, options);
+                    })
+                    .then(function (output) {
+                        // Write the resulting output to the fs
+                        return objectToFs(options.output, output.files);
+                    })
+                    .then(function () {
+                        return console.log('okk');
+                    })
+                    .catch(function (err) {
+                        // Log the error stacktrace
+                        console.error(err instanceof Error ? (err.stack || err.message) : err);
+
+                        return console.error('error');
+                    });
+
+            /**
+             * Save on object structure to the file system.
+             *
+             * @param  {String}  dir
+             * @param  {Object}  objectToSave
+             * @return {Promise}
+             */
+            function objectToFs(dir, objectToSave) {
+                var promise = mkdirp(dir);
+
+                Object.keys(objectToSave).forEach(function (key) {
+                    var content = objectToSave[key];
+                    var filename = resolve(dir, key);
+
+                    promise = promise.then(function () {
+                        if (typeof content === 'object') {
+                            return objectToFs(filename, content);
+                        }
+
+                        return writeFile(filename, content);
+                    });
+                });
+
+                return promise.then(function () {
+                    return objectToSave;
+                });
+            }
+
+
+        });
+
+
+//        $('.titlebar-minimize').on('click', function (event) {
+//
+//        });
+
+    })();
+
+</script>
+</html>
