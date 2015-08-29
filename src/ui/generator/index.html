@@ -48,11 +48,9 @@
                 </div>
                 <div class="card-action">
                     <button class="btn waves-effect waves-light goto-step2" type="button">Next
-                        <i class="material-icons"></i>
                     </button>
 
                     <button class="btn btn-link waves-effect right exit" type="button">Exit
-                        <i class="material-icons"></i>
                     </button>
 
                 </div>
@@ -87,14 +85,11 @@
                 </div>
                 <div class="card-action">
                     <button class="btn waves-effect waves-light goto-step3" type="button">Next
-                        <i class="material-icons"></i>
                     </button>
 
                     <button class="btn btn-link waves-effect right exit" type="button">Cancel
-                        <i class="material-icons"></i>
                     </button>
                     <button class="btn btn-link waves-effect right goto-step1" type="button">Back
-                        <i class="material-icons"></i>
                     </button>
 
                 </div>
@@ -113,6 +108,9 @@
 
                     <div class="card-panel red lighten-1 error-step3">
                         <span class="white-text text-accent-1">Required field</span>
+                    </div>
+                    <div class="card-panel red lighten-1 error-generator">
+                        <span class="white-text text-accent-1">Error: unknown</span>
                     </div>
 
                     <div class="row final-container">
@@ -134,14 +132,11 @@
                 </div>
                 <div class="card-action">
                     <button type="submit" class="btn waves-effect waves-light" id="submit-form">Generate
-                        <i class="material-icons"></i>
                     </button>
                     <button class="btn btn-link waves-effect right exit" type="button">Cancel
-                        <i class="material-icons"></i>
                     </button>
 
-                    <button class="btn btn-link waves-effect right goto-step4" type="button">Back
-                        <i class="material-icons"></i>
+                    <button class="btn btn-link waves-effect right goto-step2" type="button">Back
                     </button>
 
                 </div>
@@ -160,6 +155,12 @@
                     <div class="card-panel  green">
                         <span class="white-text text-accent-1">Code Generated, enjoy!!</span>
                     </div>
+
+                    <div class="center">
+                        <button class="btn  waves-effect text-black waves-light open-output-folder">Open Folder</button>
+                    </div>
+
+
                     <blockquote>
                         See our code on <a target="_blank" href="#" id="github-link">Github</a>.
                     </blockquote>
@@ -170,10 +171,8 @@
                     <button type="button"
                             class="btn btn-again  waves-effect text-black waves-light grey lighten-4 goto-step1">Start
                         again
-                        <i class="material-icons"></i>
                     </button>
                     <button class="btn btn-link waves-effect right exit" type="button">Exit
-                        <i class="material-icons"></i>
                     </button>
 
 
@@ -199,45 +198,64 @@
     (function () {
 
         var remote = require('remote');
+        var fs = require('fs');
         var BrowserWindow = remote.require('browser-window');
-//        var languages = require('../../languages');
-//        var assert = require('assert');
-//        var Bluebird = require('bluebird');
-//        var resolve = require('path').resolve;
-//        var ramlParser = require('raml-parser');
-//        var mkdirp = Bluebird.promisify(require('mkdirp'));
-//        var writeFile = Bluebird.promisify(require('fs').writeFile);
+        var languages = require('../../languages');
+        var assert = require('assert');
+        var Bluebird = require('bluebird');
+        var resolve = require('path').resolve;
+        var ramlParser = require('raml-parser');
+        var mkdirp = Bluebird.promisify(require('mkdirp'));
+        var writeFile = Bluebird.promisify(require('fs').writeFile);
 
 
         $steps = $('#generator > .row');
 
+        function goToStep1() {
+            $steps.hide();
+            $('#step1').fadeIn();
+        }
+
+        function goToStep2() {
+            $steps.hide();
+            $('#step2').fadeIn();
+        }
+
+        function goToStep3() {
+            $steps.hide();
+            $('.final-container').show();
+            $('.error-generator').hide();
+            $('.loading').hide();
+            $('#step3').fadeIn();
+        }
+
+        function goToStep4() {
+            $steps.hide();
+            $('#step4').fadeIn();
+        }
+
+
         $('.goto-step1').on('click', function (event) {
             setTimeout(function () {
-                $steps.hide();
-                $('#step1').fadeIn();
+                goToStep1();
             }, 200);
 
         });
         $('.goto-step2').on('click', function (event) {
             setTimeout(function () {
-                $steps.hide();
-                $('#step2').fadeIn();
+                goToStep2();
             }, 200);
 
         });
         $('.goto-step3').on('click', function (event) {
             setTimeout(function () {
-                $steps.hide();
-                $('.final-container').show();
-                $('.loading').hide();
-                $('#step3').fadeIn();
+                goToStep3();
             }, 200);
 
         });
         $('.goto-step4').on('click', function (event) {
             setTimeout(function () {
-                $steps.hide();
-                $('#step4').fadeIn();
+                goToStep4();
             }, 200);
 
         });
@@ -266,15 +284,26 @@
         $('#generator').find('input[name=inputFile]').change(function (event) {
             var theFiles = event.target.files;
             inputFile = theFiles[0].path;
+            if(inputFile){
+                goToStep2();
+            }
             console.log(inputFile);
         });
 
         $('#generator').find('input[name=outputDirectory]').change(function (event) {
             var theFiles = event.target.files;
             outputDirectory = theFiles[0].path;
+            if(outputDirectory){
+                $('#submit-form').trigger('click');
+            }
             console.log(outputDirectory);
         });
 
+
+        $('.open-output-folder').on('click', function (event) {
+            event.preventDefault();
+            require('shell').openItem(outputDirectory);
+        });
 
         $('#submit-form').on('click', function (event) {
             event.preventDefault();
@@ -285,32 +314,31 @@
             var template = $('#generator').find('select[name=template]').val();
 
             if (!inputFile) {
-                $('.goto-step1').trigger('click');
+                goToStep1();
                 $('.error-step1').fadeIn();
 
                 setTimeout(function () {
                     $('.error-step1').fadeOut();
                 }, 2000);
+                return;
             } else if (!outputDirectory) {
-                $('.goto-step3').trigger('click');
+                goToStep3();
                 $('.error-step3').fadeIn();
 
                 setTimeout(function () {
                     $('.error-step3').fadeOut();
                 }, 2000);
+                return;
             } else if (!template) {
-                $('.goto-step2').trigger('click');
+                goToStep2();
                 $('.error-step2').fadeIn();
 
                 setTimeout(function () {
                     $('.error-step2').fadeOut();
                 }, 2000);
+                return;
             }
 
-            console.log($('form').serializeArray());
-
-
-            return;
 
             /**
              * Pull out options into an object for passing into generator.
@@ -333,7 +361,11 @@
                     })
                     .then(function (options) {
                         // Load the RAML file
-                        return ramlParser.loadFile(options.entry);
+                        //FIXME de momento solo se puede usando readFileSync y los schemas deben estar en el mismo archivo
+
+                        var fileData = fs.readFileSync(options.entry);
+                        return ramlParser.load(fileData);
+//                        return ramlParser.loadFile(options.entry);
                     })
                     .then(function (ast) {
                         // Process the RAML object using the selected language
@@ -344,13 +376,19 @@
                         return objectToFs(options.output, output.files);
                     })
                     .then(function () {
-                        return console.log('okk');
+                        return setTimeout(function () {
+                            goToStep4();
+                        }, 200);
                     })
                     .catch(function (err) {
                         // Log the error stacktrace
-                        console.error(err instanceof Error ? (err.stack || err.message) : err);
+                        var errorDescription = err instanceof Error ? (err.stack || err.message) : err;
 
-                        return console.error('error');
+                        goToStep3();
+                        console.log(err);
+                        $('.error-generator').fadeIn();
+                        $('.error-generator span').text('Error: ' + errorDescription);
+
                     });
 
             /**
@@ -384,10 +422,6 @@
 
         });
 
-
-//        $('.titlebar-minimize').on('click', function (event) {
-//
-//        });
 
     })();
 

@@ -103,7 +103,7 @@ gulp.task('build:apps', function () {
             cache: './cache',
             version: packageJson.version,
             packaging: true,
-            platforms: ['darwin-x64'],
+            platforms: ['darwin'],
             //platforms: ['win32-ia32', 'darwin-x64', 'linux-ia32'],
             platformResources: {
                 darwin: {
