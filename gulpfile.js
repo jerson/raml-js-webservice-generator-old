@@ -15,6 +15,8 @@ var electron = require('gulp-electron');
 var packageJson = require('./package.json');
 //var electron = require('gulp-atom-electron');
 
+process.NODE_ENV = 'dev';
+
 var getBundleName = function () {
     var version = require('./package.json').version;
     var name = require('./package.json').name;
@@ -95,6 +97,10 @@ gulp.task('serve', ['watch:dist'], function () {
 gulp.task('build:all', ['build:js', 'build:apps']);
 
 gulp.task('build:apps', function () {
+
+    var packageJson = require('./src/package.json');
+
+    process.NODE_ENV = 'prod';
 
     return gulp.src("")
         .pipe(electron({

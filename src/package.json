@@ -1,0 +1,7 @@
+{
+  "name": "raml-js-webservice-generator-ui",
+  "version": "1.0.0",
+  "description": "RAML WebService generator",
+  "main": "ui/main.js",
+  "author": "Gerson Alexander Pardo Gamez <jeral17@gmail.com>"
+}
